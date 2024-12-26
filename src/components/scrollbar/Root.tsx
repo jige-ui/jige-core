@@ -3,10 +3,15 @@ import { type JSX, splitProps } from 'solid-js'
 import context from './context'
 
 export default function Root(
-  props: { children: JSX.Element, height?: string, maxHeight?: string, onMouseEnter?: (e: MouseEvent & {
-    currentTarget: HTMLDivElement
-    target: DOMElement
-  }) => void }
+  props: {
+    children: JSX.Element
+    height?: string
+    maxHeight?: string
+    onMouseEnter?: (e: MouseEvent & {
+      currentTarget: HTMLDivElement
+      target: DOMElement
+    }) => void
+  }
   & Omit<JSX.HTMLAttributes<HTMLDivElement>, 'style' | 'onMouseEnter'>,
 ) {
   const Context = context.initial({

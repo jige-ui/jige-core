@@ -17,10 +17,16 @@ export function Root<T extends InitialValue>(props: {
 
   const [, actions] = Context.value
 
-  watch(() => local.onChange, () => { actions.setFormData = local.onChange })
-  // props.value is watched
-  // eslint-disable-next-line solid/reactivity
-  watch(() => local.value, () => { actions.getFormData = (key: string) => (local.value[key]) })
+  watch(
+    () => local.onChange,
+    () => { actions.setFormData = local.onChange },
+  )
+
+  watch(
+    () => local.value,
+    // eslint-disable-next-line solid/reactivity
+    () => { actions.getFormData = (key: string) => (local.value[key]) },
+  )
 
   return (
     <Context.Provider>

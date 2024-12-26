@@ -8,7 +8,10 @@ export function Item(props: { children: JSX.Element, name: string }) {
   const Context = itemContext.initial()
   const [itemState, itemActions] = Context.value
 
-  watch(() => props.name, () => { itemActions.setName(props.name) })
+  watch(
+    () => props.name,
+    () => { itemActions.setName(props.name) },
+  )
 
   watch(() => actions.getFormData(props.name), (data) => {
     itemActions.setValue(data)

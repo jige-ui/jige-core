@@ -8,7 +8,12 @@ export default function TestScrollbar() {
       height: '600px',
     }}
     >
-      <ScrollbarCore maxHeight="300px" class="pr-4 pb-4" onMouseEnter={() => { setIsIn(true) }} onMouseLeave={() => { setIsIn(false) }}>
+      <ScrollbarCore
+        maxHeight="300px"
+        class="pr-4 pb-4"
+        onMouseEnter={() => { setIsIn(true) }}
+        onMouseLeave={() => { setIsIn(false) }}
+      >
         <ScrollbarCore.Content>
           <For each={[...Array.from({ length: 100 }).keys()]}>
             {i => (
