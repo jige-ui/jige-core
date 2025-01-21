@@ -192,7 +192,7 @@ export default function TestForm() {
       </FormCore.Item>
 
       <FormCore.Item name="select">
-        <SelectCore>
+        <SelectCore placement="bottom">
           <SelectCore.Trigger>
             {state => (
               <button class="p-1 min-w-100px b-gray border rounded-md hover:b-black transition flex items-center" role="button" type="button">
