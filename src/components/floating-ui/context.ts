@@ -1,5 +1,5 @@
 import type { CloseableStatus } from '@/common/types'
-import type { Derivable, OffsetOptions, Placement, SizeOptions } from '@floating-ui/dom'
+import type { Derivable, FlipOptions, OffsetOptions, Placement, ShiftOptions, SizeOptions } from '@floating-ui/dom'
 import { computePosition, flip, offset, shift, size } from '@floating-ui/dom'
 import { createComponentState } from 'solid-uses'
 
@@ -24,8 +24,8 @@ export const context = createComponentState({ state: () => ({
     },
   },
   plugin: {
-    shift: true,
-    flip: true,
+    shift: true as ShiftOptions | Derivable<ShiftOptions> | boolean,
+    flip: true as FlipOptions | Derivable<FlipOptions> | boolean,
     offset: 4 as OffsetOptions,
     size: undefined as undefined | SizeOptions | Derivable<SizeOptions>,
   },
@@ -71,11 +71,13 @@ export const context = createComponentState({ state: () => ({
     const middleware = [offset(state.plugin.offset)]
 
     if (state.plugin.shift) {
-      middleware.push(shift())
+      const conf = state.plugin.shift === true ? {} : state.plugin.shift
+      middleware.push(shift(conf))
     }
 
     if (state.plugin.flip) {
-      middleware.push(flip())
+      const conf = state.plugin.flip === true ? {} : state.plugin.flip
+      middleware.push(flip(conf))
     }
 
     if (state.plugin.size) {
