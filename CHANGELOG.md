@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.34.0](https://github.com/jige-ui/jige-core/compare/v0.33.1...v0.34.0) (2025-01-23)
+
+
+### Features
+
+* optmize 'floating-ui' props and add plugin 'size' ([288abe4](https://github.com/jige-ui/jige-core/commit/288abe498b0d79d75519fd340d4554aa21cd53ea))
+
 ## [0.33.1](https://github.com/jige-ui/jige-core/compare/v0.33.0...v0.33.1) (2025-01-23)
 
 
