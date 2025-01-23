@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.33.0](https://github.com/jige-ui/jige-core/compare/v0.32.0...v0.33.0) (2025-01-23)
+
+
+### Features
+
+* add disabled to form components ([1cfdaba](https://github.com/jige-ui/jige-core/commit/1cfdaba6107a3c5622f6323a8d6a0a77887001f7))
+
 ## [0.32.0](https://github.com/jige-ui/jige-core/compare/v0.31.0...v0.32.0) (2025-01-21)
 
 
