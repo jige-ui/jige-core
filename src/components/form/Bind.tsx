@@ -25,7 +25,7 @@ export function Bind(props: {
   })
 
   watch(() => formStat.disabled, (d) => {
-    props.setDisabled(d)
+    stat.name && props.setDisabled(d)
   })
 
   return (
