@@ -1,3 +1,5 @@
+import type { Derivable, OffsetOptions, SizeOptions } from '@floating-ui/dom'
+
 export type Placement = 'top' | 'right' | 'bottom' | 'left' | 'top-start' | 'top-end' | 'right-start' | 'right-end' | 'bottom-start' | 'bottom-end' | 'left-start' | 'left-end'
 
 export interface FloatingUiCoreProps {
@@ -8,8 +10,9 @@ export interface FloatingUiCoreProps {
   canHoverContent?: boolean
   disabled?: boolean
   floatingOption?: {
-    offset?: number
+    offset?: OffsetOptions
     shift?: boolean
     flip?: boolean
+    size?: SizeOptions | Derivable<SizeOptions>
   }
 }

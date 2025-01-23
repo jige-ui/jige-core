@@ -1,5 +1,6 @@
 import type { CloseableStatus } from '@/common/types'
-import { computePosition, flip, offset, type Placement, shift } from '@floating-ui/dom'
+import type { Derivable, OffsetOptions, Placement, SizeOptions } from '@floating-ui/dom'
+import { computePosition, flip, offset, shift, size } from '@floating-ui/dom'
 import { createComponentState } from 'solid-uses'
 
 export const context = createComponentState({ state: () => ({
@@ -25,7 +26,8 @@ export const context = createComponentState({ state: () => ({
   plugin: {
     shift: true,
     flip: true,
-    offset: 4,
+    offset: 4 as OffsetOptions,
+    size: undefined as undefined | SizeOptions | Derivable<SizeOptions>,
   },
 }), methods: {
   /* only for hover */
@@ -66,7 +68,7 @@ export const context = createComponentState({ state: () => ({
       return
     }
 
-    const middleware = [offset(state.plugin.offset + (state.arrow / 2))]
+    const middleware = [offset(state.plugin.offset)]
 
     if (state.plugin.shift) {
       middleware.push(shift())
@@ -74,6 +76,10 @@ export const context = createComponentState({ state: () => ({
 
     if (state.plugin.flip) {
       middleware.push(flip())
+    }
+
+    if (state.plugin.size) {
+      middleware.push(size(state.plugin.size))
     }
 
     const { x, y, placement, middlewareData } = await computePosition($reference, $content, {

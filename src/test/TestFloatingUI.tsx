@@ -35,7 +35,9 @@ export default function TestFloatingUI() {
           floatingOption={{
             shift: true,
             flip: true,
-            offset: offset(),
+            offset: ({ rects }) => {
+              return -rects.floating.height / 2
+            },
           }}
         >
           <FloatingUiCore.Trigger>
