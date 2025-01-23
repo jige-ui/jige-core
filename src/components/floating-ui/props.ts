@@ -1,3 +1,5 @@
+// fix TS2742
+import type {} from '@floating-ui/core'
 import type { Derivable, OffsetOptions, SizeOptions } from '@floating-ui/dom'
 
 export type Placement = 'top' | 'right' | 'bottom' | 'left' | 'top-start' | 'top-end' | 'right-start' | 'right-end' | 'bottom-start' | 'bottom-end' | 'left-start' | 'left-end'
