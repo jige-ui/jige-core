@@ -4,6 +4,7 @@ const context = createComponentState({
   state: () => ({
     value: [] as string[],
     name: '',
+    disabled: false,
   }),
   methods: {
     removeValue(value: string) {

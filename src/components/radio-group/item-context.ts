@@ -4,6 +4,7 @@ const itemContext = createComponentState({
   state: () => ({
     value: '',
     nativeEl: null as HTMLInputElement | null,
+    disabled: false,
   }),
 })
 

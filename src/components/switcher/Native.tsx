@@ -24,6 +24,7 @@ export default function Native(props: {
         e.preventDefault()
         actions.setFocused(true)
       }}
+      disabled={state.disabled}
 
       onBlur={() => actions.setFocused(false)}
     />

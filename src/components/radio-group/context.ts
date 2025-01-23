@@ -4,6 +4,7 @@ const context = createComponentState({
   state: () => ({
     value: '',
     name: '',
+    disabled: false,
   }),
 })
 

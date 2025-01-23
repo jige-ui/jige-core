@@ -10,10 +10,13 @@ export interface InitialValue {
 export function Root<T extends InitialValue>(props: {
   children: JSX.Element
   value: T
+  disabled?: boolean
   onChange: SetStoreFunction<T>
-} & JSX.FormHTMLAttributes<HTMLFormElement>) {
-  const [local, others] = splitProps(props, ['children', 'value', 'onChange'])
-  const Context = context.initial()
+} & Omit<JSX.FormHTMLAttributes<HTMLFormElement>, 'onChange' | 'value'>) {
+  const [local, others] = splitProps(props, ['children', 'value', 'onChange', 'disabled'])
+  const Context = context.initial({
+    disabled: () => local.disabled,
+  })
 
   const [, actions] = Context.value
 
@@ -30,7 +33,7 @@ export function Root<T extends InitialValue>(props: {
 
   return (
     <Context.Provider>
-      <form {...others}>{local.children}</form>
+      <form {...others} aria-disabled={local.disabled}>{local.children}</form>
     </Context.Provider>
   )
 }

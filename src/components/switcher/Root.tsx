@@ -30,9 +30,15 @@ export function Control(props: {
   )
 }
 
-export function Root(props: PropsWithContextChild<typeof context, { checked?: boolean, onChange?: (value: boolean) => void }>) {
+export function Root(props:
+PropsWithContextChild<typeof context, {
+  checked?: boolean
+  onChange?: (value: boolean) => void
+  disabled?: boolean
+}>) {
   const Context = context.initial({
     checked: () => props.checked,
+    disabled: () => props.disabled,
   })
   const [state, actions] = Context.value
 
@@ -42,7 +48,7 @@ export function Root(props: PropsWithContextChild<typeof context, { checked?: bo
 
   return (
     <Context.Provider>
-      <FormCore.Bind value={state.checked} setValue={actions.setChecked} setName={actions.setName}>
+      <FormCore.Bind setDisabled={actions.setDisabled} value={state.checked} setValue={actions.setChecked} setName={actions.setName}>
         {callMaybeContextChild(context, props.children)}
       </FormCore.Bind>
     </Context.Provider>

@@ -1,7 +1,7 @@
 import { createComponentState } from 'solid-uses'
 
 const context = createComponentState({ state: () => ({
-
+  disabled: false,
 }), methods: {
   setFormData(key: string, value: any) {
     console.log(key, value)

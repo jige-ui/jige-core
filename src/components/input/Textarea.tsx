@@ -18,7 +18,7 @@ export function Textarea(props: TextareaProps) {
       rows={localProps.rows || 3}
       value={state.value}
       onInput={inputHandler}
-      disabled={localProps.disabled}
+      disabled={state.disabled || localProps.disabled}
       name={localProps.name || state.name}
       aria-label={localProps['aria-label'] || state.name || 'input'}
     />

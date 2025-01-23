@@ -9,13 +9,15 @@ export default function Root<T extends string | number>(props: {
   children: JSX.Element
   value?: T
   onChange?: (value: T) => void
+  disabled?: boolean
 } & FloatingUiCoreProps) {
   const Context = context.initial({
     value: () => props.value,
+    disabled: () => props.disabled,
   })
   const [state, actions] = Context.value
 
-  const [localProps, floatingProps] = splitProps(props, ['children', 'value', 'onChange'])
+  const [localProps, floatingProps] = splitProps(props, ['children', 'value', 'onChange', 'disabled'])
 
   watch(() => state.value, (v) => {
     localProps.onChange?.(v)
@@ -23,8 +25,8 @@ export default function Root<T extends string | number>(props: {
 
   return (
     <Context.Provider>
-      <FormCore.Bind value={state.value} setValue={actions.setValue}>
-        <FloatingUiCore trigger="click" placement="bottom" {...floatingProps}>
+      <FormCore.Bind setDisabled={actions.setDisabled} value={state.value} setValue={actions.setValue}>
+        <FloatingUiCore trigger="click" placement="bottom" disabled={state.disabled} {...floatingProps}>
           {props.children}
         </FloatingUiCore>
       </FormCore.Bind>

@@ -11,9 +11,11 @@ import itemContext from './item-context'
 function Item(props: {
   children: JSX.Element
   value: string
+  disabled?: boolean
 }) {
   const Context = itemContext.initial({
     value: () => props.value,
+    disabled: () => props.disabled,
   })
 
   return (
@@ -45,6 +47,7 @@ function ItemNative(props: {
       style={hiddenStyle}
       value={itemState.value}
       name={state.name}
+      disabled={state.disabled || itemState.disabled}
       onChange={(e) => {
         e.stopPropagation()
         e.target.checked && actions.setValue(itemState.value)

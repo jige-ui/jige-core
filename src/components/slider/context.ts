@@ -20,7 +20,7 @@ const context = createComponentState({ state: () => ({
   setValue(value: number) {
     const fixedValue = Math.round(Math.max(this.state.min, Math.min(this.state.max, value)) / this.state.step) * this.state.step
 
-    this.actions.setState('value', fixedValue)
+    !this.state.disabled && this.actions.setState('value', fixedValue)
   },
 
   setRatio(ratio: number) {

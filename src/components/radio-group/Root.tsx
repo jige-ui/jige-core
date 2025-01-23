@@ -8,10 +8,12 @@ export function Root(props: {
   children: JSX.Element
   value?: string
   onChange?: (v: string) => void
+  disabled?: boolean
 }) {
   const Context = context.initial({
     value: () => props.value,
     name: `radio-group-${createUniqueId()}`,
+    disabled: () => props.disabled,
   })
   const [state, actions] = Context.value
 
@@ -21,7 +23,7 @@ export function Root(props: {
 
   return (
     <Context.Provider>
-      <FormCore.Bind value={state.value} setValue={actions.setValue} setName={actions.setName}>
+      <FormCore.Bind setDisabled={actions.setDisabled} value={state.value} setValue={actions.setValue} setName={actions.setName}>
         {props.children}
       </FormCore.Bind>
     </Context.Provider>

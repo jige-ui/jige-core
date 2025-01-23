@@ -20,10 +20,6 @@ export function Root(props: { children: JSX.Element } & FloatingUiCoreProps) {
     console.log('update by ROOT')
   })
 
-  watch(() => state.disabled, (d) => {
-    d && actions.setOpen(false)
-  })
-
   return (
     <Context.Provider>
       {props.children}

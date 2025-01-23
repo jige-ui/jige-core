@@ -12,6 +12,7 @@ export default function Root(props: {
   vertical?: boolean
   reverse?: boolean
   onChange?: (value: number) => void
+  disabled?: boolean
 }) {
   const Context = context.initial({
     min: () => props.min,
@@ -20,6 +21,7 @@ export default function Root(props: {
     value: () => props.value,
     vertical: () => props.vertical,
     reverse: () => props.reverse,
+    disabled: () => props.disabled,
   })
   const [state, actions] = Context.value
 
@@ -29,7 +31,7 @@ export default function Root(props: {
 
   return (
     <Context.Provider>
-      <FormCore.Bind value={state.value} setValue={actions.setValue} setName={actions.setName}>
+      <FormCore.Bind setDisabled={actions.setDisabled} value={state.value} setValue={actions.setValue} setName={actions.setName}>
         {props.children}
       </FormCore.Bind>
     </Context.Provider>

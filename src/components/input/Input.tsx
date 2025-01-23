@@ -6,7 +6,7 @@ import context from './context'
 export function Input(props: InputProps) {
   const [state, actions] = context.useContext()
 
-  const [localProps, otherProps] = splitProps(props, ['aria-label', 'onInput', 'name'])
+  const [localProps, otherProps] = splitProps(props, ['aria-label', 'onInput', 'name', 'disabled'])
 
   const inputHandler = (e: Event) => {
     actions.setValue((e.target as HTMLTextAreaElement).value)
@@ -18,6 +18,7 @@ export function Input(props: InputProps) {
       value={state.value}
       onInput={inputHandler}
       name={localProps.name || state.name}
+      disabled={state.disabled || localProps.disabled}
       aria-label={localProps['aria-label'] || state.name || 'input'}
     />
   )

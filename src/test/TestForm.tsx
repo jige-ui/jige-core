@@ -78,7 +78,7 @@ export default function TestForm() {
   })
 
   return (
-    <FormCore onChange={setState} value={state} class="bg-gray-2 rounded-md shadow border p-2 flex-col flex gap-2">
+    <FormCore disabled onChange={setState} value={state} class="bg-gray-2 rounded-md shadow border p-2 flex-col flex gap-2">
       <FormCore.Item name="checkboxGroup">
         <CheckboxGroupCore>
           <div class="flex gap-2">

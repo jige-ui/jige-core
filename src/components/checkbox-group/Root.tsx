@@ -7,13 +7,13 @@ export function Root(props: {
   children: JSX.Element
   value?: string[]
   onChange?: (v: string[]) => void
+  disabled?: boolean
 }) {
-  const Context = context.initial()
-  const [state, actions] = Context.value
-
-  watch(() => props.value, (v) => {
-    actions.setValue(v || [])
+  const Context = context.initial({
+    disabled: () => props.disabled,
+    value: () => props.value || [],
   })
+  const [state, actions] = Context.value
 
   watch(() => state.value, (v) => {
     props.onChange?.(v)
@@ -21,7 +21,7 @@ export function Root(props: {
 
   return (
     <Context.Provider>
-      <FormCore.Bind value={state.value} setValue={actions.setValue} setName={actions.setName}>
+      <FormCore.Bind setDisabled={actions.setDisabled} value={state.value} setValue={actions.setValue} setName={actions.setName}>
         {props.children}
       </FormCore.Bind>
     </Context.Provider>
