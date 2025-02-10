@@ -48,7 +48,13 @@ PropsWithContextChild<typeof context, {
 
   return (
     <Context.Provider>
-      <FormCore.Bind setDisabled={actions.setDisabled} value={state.checked} setValue={actions.setChecked} setName={actions.setName}>
+      <FormCore.Bind
+        propDisabled={props.disabled}
+        setDisabled={actions.setDisabled}
+        value={state.checked}
+        setValue={actions.setChecked}
+        setName={actions.setName}
+      >
         {callMaybeContextChild(context, props.children)}
       </FormCore.Bind>
     </Context.Provider>

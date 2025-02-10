@@ -31,7 +31,13 @@ export default function Root(props: {
 
   return (
     <Context.Provider>
-      <FormCore.Bind setDisabled={actions.setDisabled} value={state.value} setValue={actions.setValue} setName={actions.setName}>
+      <FormCore.Bind
+        propDisabled={props.disabled}
+        setDisabled={actions.setDisabled}
+        value={state.value}
+        setValue={actions.setValue}
+        setName={actions.setName}
+      >
         {props.children}
       </FormCore.Bind>
     </Context.Provider>

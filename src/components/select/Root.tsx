@@ -25,7 +25,13 @@ export default function Root<T extends string | number>(props: {
 
   return (
     <Context.Provider>
-      <FormCore.Bind setDisabled={actions.setDisabled} value={state.value} setValue={actions.setValue}>
+      <FormCore.Bind
+        propDisabled={props.disabled}
+        setDisabled={actions.setDisabled}
+        value={state.value}
+        setValue={actions.setValue}
+        setName={actions.setName}
+      >
         <FloatingUiCore trigger="click" placement="bottom" disabled={state.disabled} {...floatingProps}>
           {props.children}
         </FloatingUiCore>

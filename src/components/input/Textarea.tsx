@@ -4,9 +4,9 @@ import { runSolidEventHandler } from '@/common/solidjs'
 import { splitProps } from 'solid-js'
 import context from './context'
 
-export function Textarea(props: TextareaProps) {
+export function Textarea(props: Omit<TextareaProps, 'disabled'>) {
   const [state, actions] = context.useContext()
-  const [localProps, otherProps] = splitProps(props, ['aria-label', 'onInput', 'disabled', 'rows', 'name'])
+  const [localProps, otherProps] = splitProps(props, ['aria-label', 'onInput', 'rows', 'name'])
 
   const inputHandler = (e: Event) => {
     actions.setValue((e.target as HTMLTextAreaElement).value)
@@ -18,7 +18,7 @@ export function Textarea(props: TextareaProps) {
       rows={localProps.rows || 3}
       value={state.value}
       onInput={inputHandler}
-      disabled={state.disabled || localProps.disabled}
+      disabled={state.disabled}
       name={localProps.name || state.name}
       aria-label={localProps['aria-label'] || state.name || 'input'}
     />
