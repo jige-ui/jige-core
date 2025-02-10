@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.35.0](https://github.com/jige-ui/jige-core/compare/v0.34.1...v0.35.0) (2025-02-10)
+
+
+### Features
+
+* export prop utils ([225e23f](https://github.com/jige-ui/jige-core/commit/225e23ffb8a12d8e6a9e3f240c8f8ba4516b9f96))
+
+
+### Bug Fixes
+
+* disabled logic ([524a967](https://github.com/jige-ui/jige-core/commit/524a967ab23cb8906097c714949066e984dbe5a9))
+
 ## [0.34.1](///compare/v0.34.0...v0.34.1) (2025-01-23)
 
 
