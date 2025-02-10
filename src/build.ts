@@ -1,4 +1,5 @@
 export * from './common/dom'
+export * from './common/props'
 export * from './components/animated-group'
 export * from './components/checkbox-group'
 export * from './components/circle-progress'
