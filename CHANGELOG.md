@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.35.2](https://github.com/jige-ui/jige-core/compare/v0.35.1...v0.35.2) (2025-02-15)
+
+
+### Bug Fixes
+
+* can't close manually ([a461ec2](https://github.com/jige-ui/jige-core/commit/a461ec299b8f94f750975da66c6078b973e08346))
+
 ## [0.35.1](https://github.com/jige-ui/jige-core/compare/v0.35.0...v0.35.1) (2025-02-15)
 
 
