@@ -22,7 +22,7 @@ export function normalizeData(data: DataType[]): [Record<string, SimpleData>[], 
   const firstItem = data[0]
   for (const key in firstItem) {
     if (typeof firstItem[key] === 'object') {
-      if (firstItem[key]!.width) {
+      if (firstItem[key]?.width) {
         colConfigs[key] = firstItem[key]!.width
         safeList.push(key)
       }
@@ -33,10 +33,10 @@ export function normalizeData(data: DataType[]): [Record<string, SimpleData>[], 
     const row: Record<string, SimpleData> = {}
     for (const key in item) {
       if (typeof item[key] === 'object') {
-        row[key] = item[key]!.data
+        row[key] = item[key]?.data || ''
       }
       else {
-        row[key] = item[key] as SimpleData
+        row[key] = item[key] || ''
       }
     }
     result.push(row)
