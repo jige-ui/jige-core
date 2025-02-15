@@ -30,7 +30,7 @@ export function Root(props: {
     if (status === 'closed') {
       props.onOpenChange?.(false)
     }
-    else {
+    if (status === 'opened') {
       props.onOpenChange?.(true)
     }
   })
