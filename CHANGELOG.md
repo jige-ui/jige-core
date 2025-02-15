@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.35.1](https://github.com/jige-ui/jige-core/compare/v0.35.0...v0.35.1) (2025-02-15)
+
+
+### Bug Fixes
+
+* add some important properties to modal ([83ff32c](https://github.com/jige-ui/jige-core/commit/83ff32c323e55117757967290a55d08ba2fde999))
+
 ## [0.35.0](https://github.com/jige-ui/jige-core/compare/v0.34.1...v0.35.0) (2025-02-10)
 
 
