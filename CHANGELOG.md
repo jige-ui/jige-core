@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.35.3](https://github.com/jige-ui/jige-core/compare/v0.35.2...v0.35.3) (2025-02-15)
+
+
+### Bug Fixes
+
+* cannot read properties of null (reading 'width') ([147ec1f](https://github.com/jige-ui/jige-core/commit/147ec1f4dd81fa2bf5ec814377421a48dafa0c47))
+
 ## [0.35.2](https://github.com/jige-ui/jige-core/compare/v0.35.1...v0.35.2) (2025-02-15)
 
 
