@@ -6,12 +6,15 @@ import { context, GloablModalStore } from './context'
 export function Root(props: {
   children: JSX.Element
   open?: boolean
+  onOpenChange?: (open: boolean) => void
   preventScroll?: boolean
   closeOnInteractOutside?: boolean
+  closeOnEsc?: boolean
 }) {
   const Context = context.initial({
     preventScroll: () => props.preventScroll,
     closeOnInteractOutside: () => props.closeOnInteractOutside,
+    closeOnEsc: () => props.closeOnEsc,
   })
   const [state, actions] = Context.value
 
@@ -21,6 +24,15 @@ export function Root(props: {
     if (isUndefined(open))
       return
     actions.setOpen(open)
+  })
+
+  watch(() => state.status, (status) => {
+    if (status === 'closed') {
+      props.onOpenChange?.(false)
+    }
+    else {
+      props.onOpenChange?.(true)
+    }
   })
 
   watch([() => state.preventScroll, () => state.status], ([p, s]) => {

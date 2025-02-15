@@ -1,3 +1,4 @@
+import type { CloseableStatus } from '@/common/types'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { combineStyle, hasAnimation } from '@/common/dom'
 import { callMaybeContextChild, type PropsWithContextChild } from '@/common/props'
@@ -25,12 +26,7 @@ export function Content(
     ref.style.pointerEvents = 'auto'
 
     useEventListener(ref, 'animationend', () => {
-      if (state.status.startsWith('clos')) {
-        actions.setStatus('closed')
-      }
-      if (state.status.startsWith('open')) {
-        actions.setStatus('opened')
-      }
+      actions.setStatus(state.status.replace('ing', 'ed') as CloseableStatus)
     })
 
     onClickOutside(ref, () => {
@@ -40,15 +36,15 @@ export function Content(
     })
 
     useEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && isActived()) {
+      if (e.key === 'Escape' && isActived() && state.closeOnEsc) {
         actions.setOpen(false)
       }
     })
 
-    watch(() => state.status, () => {
-      if (state.status.endsWith('ing')) {
+    watch(() => state.status, (status) => {
+      if (status.endsWith('ing')) {
         if (!hasAnimation(ref)) {
-          actions.setStatus(state.status.replace('ing', 'ed') as any)
+          actions.setStatus(status.replace('ing', 'ed') as CloseableStatus)
         }
       }
     })

@@ -1,12 +1,12 @@
 import type { Component } from 'solid-js'
 
-import TestFloatingUI from './test/TestFloatingUI'
+import TestModal from './test/TestModal'
 import '@unocss/reset/tailwind-compat.css'
 
 const App: Component = () => {
   return (
     <div class="m-12">
-      <TestFloatingUI />
+      <TestModal />
     </div>
   )
 }

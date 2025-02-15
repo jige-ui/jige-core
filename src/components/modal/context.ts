@@ -17,7 +17,8 @@ export const context = createComponentState({
     status: 'closed' as CloseableStatus,
     id: createUniqueId(),
     preventScroll: true,
-    closeOnInteractOutside: true,
+    closeOnInteractOutside: false,
+    closeOnEsc: false,
   }),
 
   methods: {
