@@ -1,39 +1,43 @@
-import type { SetStoreFunction } from 'solid-js/store'
-import { type JSX, splitProps } from 'solid-js'
-import { watch } from 'solid-uses'
+import type { JSX } from 'solid-js'
+import type { FormDataType, FormInstance } from './useForm'
+import { splitProps } from 'solid-js'
 import context from './context'
 
 export interface InitialValue {
   [key: string]: string | number | boolean | string[]
 }
 
-export function Root<T extends InitialValue>(props: {
+export function Root<T extends FormDataType>(props: {
   children: JSX.Element
-  value: T
+  staticFormInstance?: FormInstance<T>
   disabled?: boolean
-  onChange: SetStoreFunction<T>
-} & Omit<JSX.FormHTMLAttributes<HTMLFormElement>, 'onChange' | 'value'>) {
-  const [local, others] = splitProps(props, ['children', 'value', 'onChange', 'disabled'])
+  onFinish?: (values: T) => void
+  onFinishFailed?: (errors: Record<keyof T, string[]>) => void
+  onValuesChange?: (changedValues: Partial<T>, allValues: T) => void
+} & Omit<JSX.FormHTMLAttributes<HTMLFormElement>, 'onChange' | 'value' | 'onSubmit'>) {
+  const [local, others] = splitProps(props, ['children', 'staticFormInstance', 'disabled'])
   const Context = context.initial({
     disabled: () => local.disabled,
   })
 
-  const [, actions] = Context.value
+  const [, , nowrapData] = Context.value
 
-  watch(
-    () => local.onChange,
-    () => { actions.setFormData = local.onChange },
-  )
-
-  watch(
-    () => local.value,
-    // eslint-disable-next-line solid/reactivity
-    () => { actions.getFormData = (key: string) => (local.value[key]) },
-  )
+  if (local.staticFormInstance) {
+    nowrapData.formInstance = local.staticFormInstance as any
+  }
 
   return (
     <Context.Provider>
-      <form {...others} aria-disabled={local.disabled}>{local.children}</form>
+      <form
+        {...others}
+        aria-disabled={local.disabled}
+        onSubmit={(e) => {
+          e.preventDefault()
+          props.onFinish?.(nowrapData.formInstance.getFieldsValue() as T)
+        }}
+      >
+        {local.children}
+      </form>
     </Context.Provider>
   )
 }

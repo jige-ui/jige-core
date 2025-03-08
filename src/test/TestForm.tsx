@@ -2,7 +2,6 @@ import { CheckboxGroupCore, FloatingUiCore, FormCore, InputCore, RadioGroupCore,
 import { createElementSize } from '@solid-primitives/resize-observer'
 import { throttle } from 'radash'
 import { createSignal, For, onMount } from 'solid-js'
-import { createStore } from 'solid-js/store'
 import { watch } from 'solid-uses'
 import './test.css'
 
@@ -22,6 +21,9 @@ function SelectHeightBind() {
 function ScrollInput() {
   const [state, actions] = ScrollbarCore.useContext()
 
+  const formInstance = FormCore.useFormInstance()
+  const data = formInstance.getFieldsValue()
+
   watch(() => state.refContent, (ref) => {
     if (!ref)
       return
@@ -29,6 +31,10 @@ function ScrollInput() {
     watch([() => size.height, () => size.width], throttle({ interval: 35 }, () => {
       actions.setValue()
     }))
+  })
+
+  watch(() => data.slider, (s) => {
+    console.log(s)
   })
 
   const throttleSetValue = throttle({ interval: 30 }, actions.setValue)
@@ -63,7 +69,7 @@ function ScrollInput() {
 export default function TestForm() {
   const [x, setX] = createSignal(0)
 
-  const [state, setState] = createStore({
+  const form = FormCore.useForm({
     checkboxGroup: ['apple', 'food'],
     radio: 'apple',
     input: 'apple',
@@ -72,13 +78,15 @@ export default function TestForm() {
     slider: 50,
   })
 
+  const state = form.getFieldsValue()
+
   watch(() => state.radio, () => {
     const index = ['apple', 'food', 'air'].indexOf(state.radio)
     setX(index * 100)
   })
 
   return (
-    <FormCore disabled onChange={setState} value={state} class="bg-gray-2 rounded-md shadow border p-2 flex-col flex gap-2">
+    <FormCore staticFormInstance={form} class="bg-gray-2 rounded-md shadow border p-2 flex-col flex gap-2">
       <FormCore.Item name="checkboxGroup">
         <CheckboxGroupCore>
           <div class="flex gap-2">

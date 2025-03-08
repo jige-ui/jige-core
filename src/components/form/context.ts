@@ -1,13 +1,17 @@
+import type { FormDataType, FormInstance } from './useForm'
 import { createComponentState } from 'solid-uses'
+import { useForm } from './useForm'
 
 const context = createComponentState({ state: () => ({
   disabled: false,
-}), methods: {
+}), nowrapData: {
+  formInstance: useForm() as FormInstance<FormDataType>,
+}, methods: {
   setFormData(key: string, value: any) {
-    console.log(key, value)
+    this.nowrapData.formInstance.setFieldsValue(key, value)
   },
   getFormData(key: string): any {
-    console.log(key)
+    return this.nowrapData.formInstance.getFieldsValue()[key]
   },
 } })
 

@@ -14,9 +14,17 @@ export function Bind(props: {
   const [stat, acts] = itemContext.useContext()
   const [formStat] = context.useContext()
 
+  let isInitialed = false
+
   watch([() => stat.value, () => stat.name], ([v, n]) => {
     if (n) {
-      props.setValue(v)
+      if (!isInitialed) {
+        isInitialed = true
+        v && props.setValue(v)
+      }
+      else {
+        props.setValue(v)
+      }
       props.setName?.(n)
     }
   })
