@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.36.0](https://github.com/jige-ui/jige-core/compare/v0.35.3...v0.36.0) (2025-03-10)
+
+
+### Bug Fixes
+
+* remove broken compoent virtual select ([b9028f1](https://github.com/jige-ui/jige-core/commit/b9028f1ff9f9c0d0207553cec6e59b81ffb36997))
+
 ## [0.35.3](https://github.com/jige-ui/jige-core/compare/v0.35.2...v0.35.3) (2025-02-15)
 
 
