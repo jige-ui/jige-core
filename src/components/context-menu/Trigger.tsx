@@ -1,6 +1,8 @@
+import type { ValidComponent } from 'solid-js'
+import type { DynamicProps } from 'solid-js/web'
 import { dataSets } from '@/common/dataset'
-import { splitProps, type ValidComponent } from 'solid-js'
-import { Dynamic, type DynamicProps } from 'solid-js/web'
+import { splitProps } from 'solid-js'
+import { Dynamic } from 'solid-js/web'
 import context from './context'
 
 export function Trigger<T extends ValidComponent = 'div'>(props: { as?: T } & Omit<DynamicProps<T>, 'onContextMenu' | 'component'>) {

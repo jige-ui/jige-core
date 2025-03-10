@@ -1,9 +1,10 @@
 import type { JSX } from 'solid-js/jsx-runtime'
+import type { DataType } from './types'
 import { createElementSize } from '@solid-primitives/resize-observer'
 import { createSignal } from 'solid-js'
 import { watch } from 'solid-uses'
 import context from './context'
-import { type DataType, normalizeData } from './types'
+import { normalizeData } from './types'
 
 export default function Table(props: {
   data: DataType[]

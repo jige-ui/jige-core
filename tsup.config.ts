@@ -1,6 +1,7 @@
+import type { Options } from 'tsup'
 // tsup.config.ts
 import { solidPlugin } from 'esbuild-plugin-solid'
-import { defineConfig, type Options } from 'tsup'
+import { defineConfig } from 'tsup'
 
 function generateConfig(jsx: boolean): Options {
   return {

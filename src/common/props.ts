@@ -7,3 +7,8 @@ export type PropsWithContextChild<T extends Context, U> = Omit<U, 'children'> & 
 export function callMaybeContextChild<T extends Context>(context: T, children: MaybeContextChild<T>) {
   return typeof children === 'function' ? children(...context.useContext()) : children
 }
+
+export type MaybeCallableChild<T extends any[] = []> = JSX.Element | ((...args: T) => JSX.Element)
+export function callMaybeCallableChild(children: MaybeCallableChild<any[]>, ...args: any) {
+  return typeof children === 'function' ? children(...args) : children
+}

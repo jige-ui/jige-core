@@ -34,6 +34,7 @@
     "prepare": "husky"
   },
   "peerDependencies": {
+    "@tanstack/solid-form": "^1.0.5",
     "solid-js": "^1.9"
   },
   "dependencies": {

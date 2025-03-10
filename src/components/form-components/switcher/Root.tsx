@@ -3,7 +3,6 @@ import { callMaybeContextChild } from '@/common/props'
 import { Ref } from '@solid-primitives/refs'
 import { onMount } from 'solid-js'
 import { useEventListener, watch } from 'solid-uses'
-import { FormCore } from '../form'
 import context from './context'
 
 export function Control(props: {
@@ -40,7 +39,7 @@ PropsWithContextChild<typeof context, {
     checked: () => props.checked,
     disabled: () => props.disabled,
   })
-  const [state, actions] = Context.value
+  const [state] = Context.value
 
   watch(() => state.checked, (c) => {
     props.onChange?.(c)
@@ -48,15 +47,7 @@ PropsWithContextChild<typeof context, {
 
   return (
     <Context.Provider>
-      <FormCore.Bind
-        propDisabled={props.disabled}
-        setDisabled={actions.setDisabled}
-        value={state.checked}
-        setValue={actions.setChecked}
-        setName={actions.setName}
-      >
-        {callMaybeContextChild(context, props.children)}
-      </FormCore.Bind>
+      {callMaybeContextChild(context, props.children)}
     </Context.Provider>
   )
 }

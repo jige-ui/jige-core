@@ -1,6 +1,5 @@
 import type { JSX } from 'solid-js'
 import { watch } from 'solid-uses'
-import { FormCore } from '../form'
 import context from './context'
 
 export default function Root(props: {
@@ -23,7 +22,7 @@ export default function Root(props: {
     reverse: () => props.reverse,
     disabled: () => props.disabled,
   })
-  const [state, actions] = Context.value
+  const [state] = Context.value
 
   watch(() => state.value, () => {
     state.value !== props.value && props.onChange?.(state.value)
@@ -31,15 +30,7 @@ export default function Root(props: {
 
   return (
     <Context.Provider>
-      <FormCore.Bind
-        propDisabled={props.disabled}
-        setDisabled={actions.setDisabled}
-        value={state.value}
-        setValue={actions.setValue}
-        setName={actions.setName}
-      >
-        {props.children}
-      </FormCore.Bind>
+      {props.children}
     </Context.Provider>
   )
 }

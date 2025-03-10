@@ -1,6 +1,7 @@
+import type { PropsWithContextChild } from '@/common/props'
 import type { JSX } from 'solid-js'
 import { combineStyle, getElementHeight, hasAnimation } from '@/common/dom'
-import { callMaybeContextChild, type PropsWithContextChild } from '@/common/props'
+import { callMaybeContextChild } from '@/common/props'
 import { runSolidEventHandler } from '@/common/solidjs'
 import { mergeRefs } from '@solid-primitives/refs'
 import { createSignal, onMount, Show, splitProps } from 'solid-js'

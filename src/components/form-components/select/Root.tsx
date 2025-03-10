@@ -1,8 +1,8 @@
 import type { FloatingUiCoreProps } from '@/components/floating-ui'
+import type { JSX } from 'solid-js'
 import { FloatingUiCore } from '@/components/floating-ui'
-import { type JSX, splitProps } from 'solid-js'
+import { splitProps } from 'solid-js'
 import { watch } from 'solid-uses'
-import { FormCore } from '../form'
 import context from './context'
 
 export default function Root<T extends string | number>(props: {
@@ -15,7 +15,7 @@ export default function Root<T extends string | number>(props: {
     value: () => props.value,
     disabled: () => props.disabled,
   })
-  const [state, actions] = Context.value
+  const [state] = Context.value
 
   const [localProps, floatingProps] = splitProps(props, ['children', 'value', 'onChange', 'disabled'])
 
@@ -25,17 +25,9 @@ export default function Root<T extends string | number>(props: {
 
   return (
     <Context.Provider>
-      <FormCore.Bind
-        propDisabled={props.disabled}
-        setDisabled={actions.setDisabled}
-        value={state.value}
-        setValue={actions.setValue}
-        setName={actions.setName}
-      >
-        <FloatingUiCore trigger="click" placement="bottom" disabled={state.disabled} {...floatingProps}>
-          {props.children}
-        </FloatingUiCore>
-      </FormCore.Bind>
+      <FloatingUiCore trigger="click" placement="bottom" disabled={state.disabled} {...floatingProps}>
+        {props.children}
+      </FloatingUiCore>
     </Context.Provider>
   )
 }

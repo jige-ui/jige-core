@@ -1,11 +1,11 @@
+import type { JSX } from 'solid-js'
 import { dataSets } from '@/common/dataset'
-import { createMemo, createSignal, type JSX, onMount, splitProps } from 'solid-js'
+import { createMemo, createSignal, onMount, splitProps } from 'solid-js'
 import { useEventListener } from 'solid-uses'
 import context from './context'
 
 export default function Thumb(props: { class?: string, type: 'vertical' | 'horizontal' }
-  & Omit<JSX.HTMLAttributes<HTMLDivElement>, 'ref' | 'onClick' | 'children' | 'onMouseDown'>,
-) {
+  & Omit<JSX.HTMLAttributes<HTMLDivElement>, 'ref' | 'onClick' | 'children' | 'onMouseDown'>) {
   let isMove = false
   let startY = 0
   let startX = 0
