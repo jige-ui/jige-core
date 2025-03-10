@@ -1,7 +1,8 @@
+import type { JSX } from 'solid-js'
 import { mergeRefs } from '@solid-primitives/refs'
 import { createElementSize } from '@solid-primitives/resize-observer'
 import { throttle } from 'radash'
-import { createSignal, type JSX, splitProps } from 'solid-js'
+import { createSignal, splitProps } from 'solid-js'
 import { watch } from 'solid-uses'
 import context from './context'
 

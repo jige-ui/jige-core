@@ -1,4 +1,5 @@
-import { createUniqueId, type JSX } from 'solid-js'
+import type { JSX } from 'solid-js'
+import { createUniqueId } from 'solid-js'
 import { watch } from 'solid-uses'
 import context, { CollapsibleParents } from './context'
 

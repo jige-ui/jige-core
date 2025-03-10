@@ -1,4 +1,5 @@
-import { callMaybeContextChild, type MaybeContextChild } from '@/common/props'
+import type { MaybeContextChild } from '@/common/props'
+import { callMaybeContextChild } from '@/common/props'
 import { Ref } from '@solid-primitives/refs'
 import { createSignal } from 'solid-js'
 import { useEventListener, watch } from 'solid-uses'

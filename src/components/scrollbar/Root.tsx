@@ -1,5 +1,6 @@
+import type { JSX } from 'solid-js'
 import type { DOMElement } from 'solid-js/jsx-runtime'
-import { type JSX, splitProps } from 'solid-js'
+import { splitProps } from 'solid-js'
 import context from './context'
 
 export default function Root(

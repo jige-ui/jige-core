@@ -1,8 +1,10 @@
+import type { PropsWithContextChild } from '@/common/props'
+import type { JSX } from 'solid-js'
 import { combineStyle } from '@/common/dom'
-import { callMaybeContextChild, type PropsWithContextChild } from '@/common/props'
+import { callMaybeContextChild } from '@/common/props'
 import { runSolidEventHandler } from '@/common/solidjs'
 import { mergeRefs } from '@solid-primitives/refs'
-import { type JSX, splitProps } from 'solid-js'
+import { splitProps } from 'solid-js'
 import context from './context'
 
 export default function Track(props: PropsWithContextChild<typeof context, JSX.HTMLAttributes<HTMLDivElement>>) {
