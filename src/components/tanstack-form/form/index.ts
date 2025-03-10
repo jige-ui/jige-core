@@ -13,6 +13,6 @@ export const FormCore = Object.assign(TanstackFormCore, {
   useField() {
     const [,,statics] = fieldContext.useContext()
 
-    return statics.fieldInstance
+    return statics.fieldInstance || (() => ({}))
   },
 })
