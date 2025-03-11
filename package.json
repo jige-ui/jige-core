@@ -42,7 +42,7 @@
     "@solid-primitives/refs": "^1.0.8",
     "@solid-primitives/resize-observer": "^2.0.26",
     "radash": "^12.1.0",
-    "solid-uses": "^0.9.1"
+    "solid-uses": "^0.10.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^4.8.1",

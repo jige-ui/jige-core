@@ -4,18 +4,18 @@ import { createComponentState } from 'solid-uses'
 
 export const formContext = createComponentState({
   state: () => ({}),
-  nowrapData: {
+  nowrapData: () => ({
     tanstackForm: {} as AnyFormApi & SolidFormApi<any, any, any, any, any, any, any, any, any, any>,
-  },
+  }),
 })
 
 export const fieldContext = createComponentState({
   state: () => ({
     name: '',
   }),
-  nowrapData: {
+  nowrapData: () => ({
     fieldInstance: () => ({}) as AnyFieldApi,
-  },
+  }),
 })
 
 export type ExtendsForTanstackFormInstance = SolidFormApi<any, any, any, any, any, any, any, any, any, any>
