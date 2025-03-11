@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.36.1](https://github.com/jige-ui/jige-core/compare/v0.36.0...v0.36.1) (2025-03-11)
+
+
+### Bug Fixes
+
+* return a empty obj when no context found ([75854d7](https://github.com/jige-ui/jige-core/commit/75854d73dbfdff53840633e7fd9658155191411f))
+* state be changed by another form component ([beb1ccd](https://github.com/jige-ui/jige-core/commit/beb1ccd8f39c50a9ba85fb73ba10f7e4680c2469))
+
 ## [0.36.0](https://github.com/jige-ui/jige-core/compare/v0.35.3...v0.36.0) (2025-03-10)
 
 
