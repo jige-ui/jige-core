@@ -4,8 +4,8 @@ import { JigeFormCore as Core, createForm } from './form'
 import { formContext } from './form/context'
 
 export const FormCore = Object.assign(Core, {
-	Field: JigeFieldCore,
-	createForm,
-	useField: fieldContext.useContext,
-	useForm: formContext.useContext,
+  Field: JigeFieldCore,
+  createForm,
+  useField: fieldContext.useContext,
+  useForm: formContext.useContext,
 })

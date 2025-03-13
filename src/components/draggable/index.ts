@@ -6,7 +6,7 @@ import { context } from './context'
 export * from './types'
 
 export const DraggableCore = Object.assign(Root, {
-	Handler,
-	Content,
-	useContext: context.useContext,
+  Handler,
+  Content,
+  useContext: context.useContext,
 })

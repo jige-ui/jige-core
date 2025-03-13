@@ -4,7 +4,7 @@ import { Trigger } from './Trigger'
 import context from './context'
 
 export const CollapsibleCore = Object.assign(Root, {
-	Content,
-	Trigger,
-	useContext: context.useContext,
+  Content,
+  Trigger,
+  useContext: context.useContext,
 })

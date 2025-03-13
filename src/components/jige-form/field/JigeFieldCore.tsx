@@ -9,119 +9,119 @@ import type { JigeFormAsyncValidator, JigeFormValidator } from '../validator'
 import { fieldContext } from './context'
 
 export type JigeFieldCoreProps = PropsWithContextChild<
-	typeof fieldContext,
-	{
-		name: string
-		validateDebounceMs?: number
-		// default is true
-		keepState?: boolean
-		validators?: (JigeFormValidator | JigeFormAsyncValidator)[]
-		validateOn?: 'change' | 'blur'
-		validateRelatedFields?: string[]
-	}
+  typeof fieldContext,
+  {
+    name: string
+    validateDebounceMs?: number
+    // default is true
+    keepState?: boolean
+    validators?: (JigeFormValidator | JigeFormAsyncValidator)[]
+    validateOn?: 'change' | 'blur'
+    validateRelatedFields?: string[]
+  }
 >
 
 function FieldCore(props: JigeFieldCoreProps) {
-	const realProps = mergeProps(
-		{
-			keepState: true,
-			validateRelatedFields: [] as string[],
-		},
-		props,
-	)
+  const realProps = mergeProps(
+    {
+      keepState: true,
+      validateRelatedFields: [] as string[],
+    },
+    props,
+  )
 
-	const [formState, formActions, formStaticData] = formContext.useContext()
-	const Context = fieldContext.initial({
-		name: realProps.name,
-		validateDebounceMs: () => realProps.validateDebounceMs,
-		validateOn: () => realProps.validateOn,
-	})
-	const [fieldState, fieldActions, staticData] = Context.value
+  const [formState, formActions, formStaticData] = formContext.useContext()
+  const Context = fieldContext.initial({
+    name: realProps.name,
+    validateDebounceMs: () => realProps.validateDebounceMs,
+    validateOn: () => realProps.validateOn,
+  })
+  const [fieldState, fieldActions, staticData] = Context.value
 
-	onMount(() => {
-		console.log('fieldCore mount', fieldState.name)
-	})
+  onMount(() => {
+    console.log('fieldCore mount', fieldState.name)
+  })
 
-	onCleanup(() => {
-		console.log('fieldCore cleanup', fieldState.name)
-		if (!realProps.keepState) {
-			// clear all field state from form context
-			formActions.setFieldValue(
-				fieldState.name,
-				getValueFromPath(formStaticData.initialValues, fieldState.name),
-			)
-			formActions.setState('errorFields', fieldState.name, undefined!)
-			formActions.setState('dirtyFields', fieldState.name, undefined!)
-		}
-	})
+  onCleanup(() => {
+    console.log('fieldCore cleanup', fieldState.name)
+    if (!realProps.keepState) {
+      // clear all field state from form context
+      formActions.setFieldValue(
+        fieldState.name,
+        getValueFromPath(formStaticData.initialValues, fieldState.name),
+      )
+      formActions.setState('errorFields', fieldState.name, undefined!)
+      formActions.setState('dirtyFields', fieldState.name, undefined!)
+    }
+  })
 
-	watch(
-		() => formState.formData,
-		(d) => {
-			staticData.formData = d
-		},
-	)
+  watch(
+    () => formState.formData,
+    (d) => {
+      staticData.formData = d
+    },
+  )
 
-	watch([() => formActions.getFieldValue(fieldState.name)], ([value]) => {
-		fieldActions.setValue(
-			undefinedOr(value, getValueFromPath(formStaticData.initialValues, fieldState.name)),
-		)
-	})
+  watch([() => formActions.getFieldValue(fieldState.name)], ([value]) => {
+    fieldActions.setValue(
+      undefinedOr(value, getValueFromPath(formStaticData.initialValues, fieldState.name)),
+    )
+  })
 
-	watch([() => fieldState.name, () => fieldState.value], ([name, value]) => {
-		formActions.setFieldValue(name, value)
+  watch([() => fieldState.name, () => fieldState.value], ([name, value]) => {
+    formActions.setFieldValue(name, value)
 
-		fieldActions.setIsDirty(value !== getValueFromPath(formStaticData.initialValues, name))
-	})
+    fieldActions.setIsDirty(value !== getValueFromPath(formStaticData.initialValues, name))
+  })
 
-	watch(
-		() => realProps.validators,
-		(validators) => {
-			staticData.validators = validators || []
-		},
-	)
+  watch(
+    () => realProps.validators,
+    (validators) => {
+      staticData.validators = validators || []
+    },
+  )
 
-	watch([() => fieldState.isTouched, () => fieldState.isDirty], ([isTouched, isDirty]) => {
-		isTouched && formActions.setIsTouched(true)
-		formActions.setState('dirtyFields', realProps.name, isDirty)
-	})
+  watch([() => fieldState.isTouched, () => fieldState.isDirty], ([isTouched, isDirty]) => {
+    isTouched && formActions.setIsTouched(true)
+    formActions.setState('dirtyFields', realProps.name, isDirty)
+  })
 
-	watch(
-		[() => formState.isDirty, () => formState.isTouched],
-		([isDirty, isTouched]) => {
-			if (isDirty === false && isTouched === false) {
-				fieldActions.setIsDirty(false)
-				fieldActions.setIsTouched(false)
-			}
-		},
-		{ defer: true },
-	)
+  watch(
+    [() => formState.isDirty, () => formState.isTouched],
+    ([isDirty, isTouched]) => {
+      if (isDirty === false && isTouched === false) {
+        fieldActions.setIsDirty(false)
+        fieldActions.setIsTouched(false)
+      }
+    },
+    { defer: true },
+  )
 
-	watch(
-		() => realProps.validateRelatedFields.map((key) => formActions.getFieldValue(key)),
-		() => {
-			fieldActions.handleValidate()
-		},
-		{ defer: true },
-	)
+  watch(
+    () => realProps.validateRelatedFields.map((key) => formActions.getFieldValue(key)),
+    () => {
+      fieldActions.handleValidate()
+    },
+    { defer: true },
+  )
 
-	// errors update to form context
-	watch(
-		() => fieldState.errors,
-		(errors) => {
-			formActions.setState('errorFields', realProps.name, errors)
-		},
-	)
+  // errors update to form context
+  watch(
+    () => fieldState.errors,
+    (errors) => {
+      formActions.setState('errorFields', realProps.name, errors)
+    },
+  )
 
-	return (
-		<Context.Provider>{callMaybeContextChild(fieldContext, realProps.children)}</Context.Provider>
-	)
+  return (
+    <Context.Provider>{callMaybeContextChild(fieldContext, realProps.children)}</Context.Provider>
+  )
 }
 
 export function JigeFieldCore(props: JigeFieldCoreProps) {
-	return (
-		<Remount remountWhenChange={props.name}>
-			<FieldCore {...props} />
-		</Remount>
-	)
+  return (
+    <Remount remountWhenChange={props.name}>
+      <FieldCore {...props} />
+    </Remount>
+  )
 }
