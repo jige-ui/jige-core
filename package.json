@@ -1,67 +1,62 @@
 {
-  "name": "jige-core",
-  "type": "module",
-  "version": "0.36.1",
-  "packageManager": "pnpm@9.15.9",
-  "description": "jige-ui's core primitives",
-  "license": "MIT",
-  "sideEffects": false,
-  "exports": {
-    ".": {
-      "types": "./dist/build.d.ts",
-      "solid": "./dist/build.jsx",
-      "default": "./dist/build.js"
-    }
-  },
-  "main": "dist/build.js",
-  "module": "dist/build.js",
-  "types": "dist/build.d.ts",
-  "typesVersions": {},
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "lint": "pnpm exec eslint .",
-    "lint:fix": "pnpm exec eslint . --fix",
-    "lint-commits": "commitlint --edit",
-    "start": "vite",
-    "dev": "vite",
-    "type-check": "tsc --noEmit --skipLibCheck",
-    "build": "tsup --dts",
-    "pub": "pnpm build && pnpm publish",
-    "release": "commit-and-tag-version -i CHANGELOG.md --same-file",
-    "serve": "vite preview",
-    "prepare": "husky"
-  },
-  "peerDependencies": {
-    "@tanstack/solid-form": "^1.0.5",
-    "solid-js": "^1.9"
-  },
-  "dependencies": {
-    "@floating-ui/dom": "^1.6.12",
-    "@solid-primitives/refs": "^1.0.8",
-    "@solid-primitives/resize-observer": "^2.0.26",
-    "radash": "^12.1.0",
-    "solid-uses": "^0.10.0"
-  },
-  "devDependencies": {
-    "@antfu/eslint-config": "^4.8.1",
-    "@commitlint/cli": "^19.6.1",
-    "@commitlint/config-conventional": "^19.6.0",
-    "@floating-ui/core": "^1.6.9",
-    "@iconify-json/ri": "^1.2.0",
-    "@types/node": "^22.5.2",
-    "@unocss/reset": "^66.0.0",
-    "@unocss/vite": "^66.0.0",
-    "commit-and-tag-version": "^12.5.0",
-    "esbuild-plugin-solid": "^0.6.0",
-    "eslint": "^9",
-    "eslint-plugin-solid": "^0.14.3",
-    "husky": "^9.1.7",
-    "tsup": "^8.2.4",
-    "typescript": "^5.5.4",
-    "unocss": "^66.0.0",
-    "vite": "^6.2.1",
-    "vite-plugin-solid": "^2.11.0"
-  }
+	"name": "jige-core",
+	"type": "module",
+	"version": "0.36.1",
+	"packageManager": "pnpm@9.15.7",
+	"description": "jige-ui's core primitives",
+	"license": "MIT",
+	"sideEffects": false,
+	"exports": {
+		".": {
+			"types": "./dist/build.d.ts",
+			"solid": "./dist/build.jsx",
+			"default": "./dist/build.js"
+		}
+	},
+	"main": "dist/build.js",
+	"module": "dist/build.js",
+	"types": "dist/build.d.ts",
+	"typesVersions": {},
+	"files": ["dist"],
+	"scripts": {
+		"lint": "pnpm exec biome check .",
+		"lint:fix": "pnpm exec biome check --write .",
+		"lint-commits": "commitlint --edit",
+		"start": "vite",
+		"dev": "vite",
+		"type-check": "tsc --noEmit --skipLibCheck",
+		"build": "tsup --dts",
+		"pub": "pnpm build && pnpm publish",
+		"release": "commit-and-tag-version -i CHANGELOG.md --same-file",
+		"serve": "vite preview",
+		"prepare": "husky"
+	},
+	"peerDependencies": {
+		"solid-js": "^1.9"
+	},
+	"dependencies": {
+		"@floating-ui/dom": "^1.6.12",
+		"@solid-primitives/refs": "^1.0.8",
+		"@solid-primitives/resize-observer": "^2.0.26",
+		"radash": "^12.1.0",
+		"solid-uses": "^0.10.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@commitlint/cli": "^19.6.1",
+		"@commitlint/config-conventional": "^19.6.0",
+		"@floating-ui/core": "^1.6.9",
+		"@iconify-json/ri": "^1.2.0",
+		"@unocss/reset": "^66.0.0",
+		"@unocss/vite": "^66.0.0",
+		"commit-and-tag-version": "^12.5.0",
+		"esbuild-plugin-solid": "^0.6.0",
+		"husky": "^9.1.7",
+		"tsup": "^8.2.4",
+		"typescript": "^5.5.4",
+		"unocss": "^66.0.0",
+		"valibot": "1.0.0-rc.4",
+		"vite": "^6.2.1",
+		"vite-plugin-solid": "^2.11.0"
+	}
 }

@@ -5,15 +5,15 @@ import { defineConfig } from 'vite'
 import solidPlugin from 'vite-plugin-solid'
 
 export default defineConfig({
-  resolve: {
-    alias: {
-      '@/': `${path.resolve(__dirname, 'src')}/`,
-    },
-  },
-  plugins: [
-    UnoCSS({
-      presets: [presetUno()],
-    }),
-    solidPlugin(),
-  ],
+	resolve: {
+		alias: {
+			'@/': `${path.resolve(__dirname, 'src')}/`,
+		},
+	},
+	plugins: [
+		UnoCSS({
+			presets: [presetUno()],
+		}),
+		solidPlugin(),
+	],
 })
