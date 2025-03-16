@@ -5,6 +5,7 @@ import type {
   JigeFormValidatorCorrectReturn,
 } from '../validator'
 import { normalizeValidator } from '../validator'
+import type { Store } from 'solid-js/store'
 
 export const fieldContext = createComponentState({
   state: () => ({
@@ -29,7 +30,8 @@ export const fieldContext = createComponentState({
     handleBlur() {
       console.log('handleBlur')
       this.actions.setState('isTouched', true)
-      if (this.state.validateOn === 'blur') this.actions.handleValidate()
+      // always validate on blur
+      this.actions.handleValidate()
     },
     handleChange<T>(value: T) {
       console.log('handleChange', value)
@@ -45,25 +47,30 @@ export const fieldContext = createComponentState({
       if (this.state.isValidating || !this.state.isTouched) return
       clearTimeout(this.state.timeoutId)
       const timeoutId = setTimeout(async () => {
-        this.actions.setState('isValidating', true)
-        const errors = [] as JigeFormValidatorCorrectReturn[]
-        for (const validator of this.nowrapData.validators) {
-          const error = normalizeValidator(
-            await validator(this.state.value, this.nowrapData.formData),
-          )
-          if (error) {
-            errors.push(error)
-            if (this.state.validateFirst && error.type === 'error') break
-          }
-        }
-        this.actions.setState('errors', errors)
-        this.actions.setState('isValidating', false)
+        this.actions.setIsValidating(true)
+        await this.actions.validate()
+        this.actions.setIsValidating(false)
       }, this.state.validateDebounceMs)
       this.actions.setState('timeoutId', timeoutId as any)
+    },
+    async validate() {
+      console.log(1)
+
+      const errors = [] as JigeFormValidatorCorrectReturn[]
+      for (const validator of this.nowrapData.validators) {
+        const error = normalizeValidator(
+          await validator(this.state.value, this.nowrapData.formData),
+        )
+        if (error) {
+          errors.push(error)
+          if (this.state.validateFirst && error.type === 'error') break
+        }
+      }
+      this.actions.setState('errors', errors)
     },
   },
   nowrapData: () => ({
     validators: [] as (JigeFormValidator | JigeFormAsyncValidator)[],
-    formData: {} as Record<string, any>,
+    formData: {} as Store<Record<string, any>>,
   }),
 })

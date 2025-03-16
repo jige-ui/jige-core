@@ -53,6 +53,8 @@ function FieldCore(props: JigeFieldCoreProps) {
       formActions.setState('errorFields', fieldState.name, undefined!)
       formActions.setState('dirtyFields', fieldState.name, undefined!)
     }
+
+    formActions.setState('validateFields', fieldState.name, undefined!)
   })
 
   watch(
@@ -78,6 +80,7 @@ function FieldCore(props: JigeFieldCoreProps) {
     () => realProps.validators,
     (validators) => {
       staticData.validators = validators || []
+      formActions.setState('validateFields', fieldState.name, () => fieldActions.validate)
     },
   )
 

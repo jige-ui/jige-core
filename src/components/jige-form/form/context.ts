@@ -1,4 +1,4 @@
-import type { MaybeAsyncFn } from '@/common/types'
+import type { AsyncFn, MaybeAsyncFn } from '@/common/types'
 import { isUndefined } from '@/common/types'
 import { createComponentState } from 'solid-uses'
 import { getValueFromPath } from '../utils'
@@ -11,6 +11,7 @@ export const formContext = createComponentState({
     formData: {} as Record<string, any>,
     dirtyFields: {} as Record<string, boolean>,
     errorFields: {} as Record<string, JigeFormValidatorCorrectReturn[]>,
+    validateFields: {} as Record<string, AsyncFn>,
   }),
   getters: {
     isDirty() {
@@ -59,6 +60,8 @@ export const formContext = createComponentState({
       this.actions.setState('formData', ...keys, undefined)
     },
     async handleSubmit() {
+      await this.actions.validateFields()
+      if (!this.state.canSubmit) return
       this.actions.setIsSubmitting(true)
       await this.nowrapData.onSubmit(this.state.formData)
       this.actions.setIsSubmitting(false)
@@ -68,6 +71,25 @@ export const formContext = createComponentState({
         this.actions.setFieldValue(key, this.nowrapData.initialValues[key])
       }
       this.actions.setIsTouched(false)
+    },
+    async validateFields(
+      key?: string,
+    ): Promise<
+      typeof key extends string
+        ? JigeFormValidatorCorrectReturn[]
+        : Record<string, JigeFormValidatorCorrectReturn[]>
+    > {
+      if (key) {
+        const validator = this.state.validateFields[key]
+        if (validator) {
+          await validator(undefined)
+        }
+      } else {
+        for (const key in this.state.validateFields) {
+          await this.actions.validateFields(key)
+        }
+      }
+      return (key ? this.state.errorFields[key] : this.state.errorFields) as any
     },
   },
   nowrapData: () => ({
