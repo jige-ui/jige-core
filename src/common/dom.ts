@@ -46,10 +46,7 @@ export function combineStyle(
   a: JSX.CSSProperties,
   b: JSX.CSSProperties | string | undefined,
 ): JSX.CSSProperties | string {
-  let bb = {}
-  if (typeof b === 'string') {
-    bb = stringStyleToObject(b)
-  }
+  const bb = typeof b === 'string' ? stringStyleToObject(b) : b
   return { ...a, ...bb }
 }
 
