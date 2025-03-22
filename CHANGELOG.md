@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.37.3](https://github.com/jige-ui/jige-core/compare/v0.37.2...v0.37.3) (2025-03-22)
+
+
+### Bug Fixes
+
+* form will clear errors on reset ([aff06b1](https://github.com/jige-ui/jige-core/commit/aff06b13d7c1dceae2f0d41b2e3d9d16617c2a0e))
+
 ## [0.37.2](https://github.com/jige-ui/jige-core/compare/v0.37.1...v0.37.2) (2025-03-19)
 
 
