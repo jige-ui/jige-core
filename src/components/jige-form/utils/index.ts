@@ -8,5 +8,5 @@ export function getValueFromPath(obj: Record<string, any>, path: string) {
     }
     result = result[key]
   }
-  return result
+  return result as any
 }

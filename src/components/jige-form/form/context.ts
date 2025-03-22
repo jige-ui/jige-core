@@ -12,6 +12,9 @@ export const formContext = createComponentState({
     dirtyFields: {} as Record<string, boolean>,
     errorFields: {} as Record<string, JigeFormValidatorCorrectReturn[]>,
     validateFields: {} as Record<string, AsyncFn>,
+
+    // form-level validation
+    validate: {} as Record<string, any>,
   }),
   getters: {
     isDirty() {
@@ -61,6 +64,7 @@ export const formContext = createComponentState({
     },
     async handleSubmit() {
       await this.actions.validateFields()
+      this.actions.setIsTouched(true)
       if (!this.state.canSubmit) return
       this.actions.setIsSubmitting(true)
       await this.nowrapData.onSubmit(this.state.formData)

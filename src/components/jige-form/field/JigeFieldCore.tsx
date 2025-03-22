@@ -77,9 +77,11 @@ function FieldCore(props: JigeFieldCoreProps) {
   })
 
   watch(
-    () => realProps.validators,
-    (validators) => {
-      staticData.validators = validators || []
+    [() => realProps.validators, () => getValueFromPath(formState.validate, fieldState.name)],
+    ([validators, formLevelValidator]) => {
+      const realValidators = formLevelValidator ? [formLevelValidator] : []
+      validators && realValidators.push(...validators)
+      staticData.validators = realValidators
       formActions.setState('validateFields', fieldState.name, () => fieldActions.validate)
     },
   )
@@ -95,6 +97,7 @@ function FieldCore(props: JigeFieldCoreProps) {
       if (isDirty === false && isTouched === false) {
         fieldActions.setIsDirty(false)
         fieldActions.setIsTouched(false)
+        fieldActions.setErrors([])
       }
     },
     { defer: true },

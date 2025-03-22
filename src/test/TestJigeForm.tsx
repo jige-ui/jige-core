@@ -11,6 +11,14 @@ function valiFieldValidator(schema: v.GenericSchema | v.GenericSchemaAsync) {
   }
 }
 
+function valiForm(schemas: Record<string, v.GenericSchema | v.GenericSchemaAsync>) {
+  const finalValidate = {} as Record<string, any>
+  for (const key in schemas) {
+    finalValidate[key] = valiFieldValidator(schemas[key])
+  }
+  return finalValidate
+}
+
 export default function TestJigeForm() {
   const form = FormCore.createForm({
     defaultValues: () => ({
@@ -21,6 +29,10 @@ export default function TestJigeForm() {
       console.log('onSubmit', values)
       await sleep(2000)
     },
+    validate: valiForm({
+      name: v.pipe(v.string(), v.nonEmpty('Please enter.'), v.maxLength(6, 'max length is 6')),
+      email: v.pipe(v.string(), v.email('Please enter a valid email.')),
+    }),
   })
 
   return (
@@ -44,7 +56,10 @@ export default function TestJigeForm() {
             )
           }}
         </FormCore.Field>
-        <FormCore.Field name='email'>
+        <FormCore.Field
+          name='email'
+          validators={[valiFieldValidator(v.pipe(v.string(), v.maxLength(13, 'max length is 13')))]}
+        >
           {(state, actions) => {
             return (
               <div>
@@ -64,6 +79,7 @@ export default function TestJigeForm() {
         </FormCore.Field>
         <FormCore.Field
           name={form.context[0].formData.name}
+          keepState={false}
           validateRelatedFields={['name']}
           validators={[
             valiFieldValidator(
