@@ -8,12 +8,12 @@ export function Root(props: {
   open?: boolean
   onOpenChange?: (open: boolean) => void
   preventScroll?: boolean
-  closeOnInteractOutside?: boolean
+  closeOnClickMask?: boolean
   closeOnEsc?: boolean
 }) {
   const Context = context.initial({
     preventScroll: () => props.preventScroll,
-    closeOnInteractOutside: () => props.closeOnInteractOutside,
+    closeOnClickMask: () => props.closeOnClickMask,
     closeOnEsc: () => props.closeOnEsc,
   })
   const [state, actions] = Context.value

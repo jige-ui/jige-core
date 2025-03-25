@@ -41,6 +41,7 @@
     "@solid-primitives/refs": "^1.0.8",
     "@solid-primitives/resize-observer": "^2.1.0",
     "radash": "^12.1.0",
+    "solid-focus-trap": "^0.1.9",
     "solid-uses": "^0.10.0"
   },
   "devDependencies": {

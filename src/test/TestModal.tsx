@@ -11,7 +11,7 @@ function Dialog(props: {
   let contentRef!: HTMLDivElement
 
   return (
-    <ModalCore preventScroll={true}>
+    <ModalCore preventScroll={true} closeOnClickMask>
       <ModalCore.Trigger>
         <button type='button' class='bg-amber p-2' ref={triggerRef}>
           Trigger

@@ -33,18 +33,12 @@ export function Handler(props: {
       const $tar = state.targetElement
       if (state.disabled || !$tar) return
 
-      if (state.status === 'initial') {
-        const initialRect = getElementRect($tar)
-        actions.setX(initialRect.x)
-        actions.setY(initialRect.y)
-        actions.setInitialX(initialRect.x)
-        actions.setInitialY(initialRect.y)
-        actions.setStatus('ready')
-      }
+      const rect = getElementRect($tar)
+
+      actions.calcInitial()
 
       start = true
       startPos = { x: e.clientX, y: e.clientY }
-      const rect = getElementRect($tar)
       startRectPos = { x: rect.x, y: rect.y }
     })
 

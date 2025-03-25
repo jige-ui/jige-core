@@ -5,8 +5,9 @@ import type { CloseableStatus } from '@/common/types'
 import { Ref } from '@solid-primitives/refs'
 import { createMemo, onCleanup, onMount, splitProps } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
-import { onClickOutside, useEventListener, watch } from 'solid-uses'
+import { useEventListener, watch } from 'solid-uses'
 import { GloablModalStore, context } from './context'
+import createFocusTrap from 'solid-focus-trap'
 
 export function Content(
   props: PropsWithContextChild<typeof context, JSX.HTMLAttributes<HTMLDivElement>>,
@@ -25,15 +26,15 @@ export function Content(
     })
 
     ref.style.pointerEvents = 'auto'
+    ref.click()
+
+    createFocusTrap({
+      element: () => ref,
+      enabled: () => state.status === 'opened',
+    })
 
     useEventListener(ref, 'animationend', () => {
       actions.setStatus(state.status.replace('ing', 'ed') as CloseableStatus)
-    })
-
-    onClickOutside(ref, () => {
-      if (state.closeOnInteractOutside && isActived()) {
-        actions.setOpen(false)
-      }
     })
 
     useEventListener('keydown', (e) => {

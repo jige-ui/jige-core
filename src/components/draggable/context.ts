@@ -4,7 +4,7 @@ import type { DarggableStatus } from './types'
 
 export const context = createComponentState({
   state: () => ({
-    status: 'initial' as DarggableStatus | 'initial' | 'ready',
+    status: 'ready' as DarggableStatus | 'ready',
     /**
      * the threshold of the distance before the drag starts. 'px'
      */
@@ -56,6 +56,16 @@ export const context = createComponentState({
       }
 
       this.actions.setState('y', realY)
+    },
+    calcInitial() {
+      const ref = this.state.targetElement
+      if (!ref) return
+      const transform = ref.style.transform
+      ref.style.transform = 'none'
+      const rect = ref.getBoundingClientRect()
+      this.actions.setInitialX(rect.x)
+      this.actions.setInitialY(rect.y)
+      ref.style.transform = transform
     },
 
     approxPosInBounds(x: number, y: number): { safeX: number; safeY: number } {

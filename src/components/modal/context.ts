@@ -24,7 +24,7 @@ export const context = createComponentState({
     status: 'closed' as CloseableStatus,
     id: createUniqueId(),
     preventScroll: true,
-    closeOnInteractOutside: false,
+    closeOnClickMask: false,
     closeOnEsc: false,
   }),
 
