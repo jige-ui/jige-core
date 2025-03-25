@@ -60,6 +60,7 @@ function FloatingContentCore(
         position: 'fixed',
         'z-index': localProps.zindex ?? 'auto',
         'min-width': 'max-content',
+        'pointer-events': 'auto',
       }}
       ref={actions.setRefContent}
     >

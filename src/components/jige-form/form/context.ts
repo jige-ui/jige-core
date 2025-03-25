@@ -3,6 +3,7 @@ import { isUndefined } from '@/common/types'
 import { createComponentState } from 'solid-uses'
 import { getValueFromPath } from '../utils'
 import type { JigeFormValidatorCorrectReturn } from '../validator'
+import { getUniqueId } from '../field'
 
 export const formContext = createComponentState({
   state: () => ({
@@ -12,7 +13,7 @@ export const formContext = createComponentState({
     dirtyFields: {} as Record<string, boolean>,
     errorFields: {} as Record<string, JigeFormValidatorCorrectReturn[]>,
     validateFields: {} as Record<string, AsyncFn>,
-
+    arrayFields: {} as Record<string, number[]>,
     // form-level validation
     validate: {} as Record<string, any>,
   }),
@@ -37,6 +38,7 @@ export const formContext = createComponentState({
       return getValueFromPath(this.state.formData, key)
     },
     setFieldValue(key: string, value: any | ((prev: any) => any)) {
+      if (isUndefined(value)) return
       // key probably has a dot-separated path
       const keys = key.split('.') as [string]
 
@@ -71,9 +73,23 @@ export const formContext = createComponentState({
       this.actions.setIsSubmitting(false)
     },
     handleReset() {
+      const cloneInitialValues = JSON.parse(JSON.stringify(this.nowrapData.initialValues))
       for (const key in this.state.formData) {
-        this.actions.setFieldValue(key, this.nowrapData.initialValues[key])
+        this.actions.setFieldValue(key, cloneInitialValues[key])
       }
+
+      for (const key in this.state.arrayFields) {
+        this.actions.setState(
+          'arrayFields',
+          key,
+          getValueFromPath(cloneInitialValues, key)?.map(() => getUniqueId()) || [],
+        )
+      }
+
+      for (const key in this.state.dirtyFields) {
+        this.actions.setState('dirtyFields', key, undefined!)
+      }
+
       this.actions.setIsTouched(false)
     },
     async validateFields(

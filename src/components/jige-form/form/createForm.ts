@@ -10,12 +10,7 @@ export function createForm<T extends FieldValues>(params?: FormOptions<T>) {
 
   const [, actions, staticData] = Context.value
 
-  watch(
-    () => ({ ...params?.defaultValues?.() }),
-    (values) => {
-      staticData.initialValues = values || {}
-    },
-  )
+  staticData.initialValues = params?.defaultValues?.() || {}
 
   watch(
     () => params?.onSubmit,
@@ -35,7 +30,11 @@ export function createForm<T extends FieldValues>(params?: FormOptions<T>) {
     {},
     {
       Provider: Context.Provider,
-      context: Context.value,
+      context: Context.value as [
+        Omit<(typeof Context.value)[0], 'formData'> & { formData: T },
+        typeof actions,
+        typeof staticData,
+      ],
     },
   )
 

@@ -1,6 +1,5 @@
 import type { PropsWithContextChild } from '@/common/props'
 import { callMaybeContextChild, undefinedOr } from '@/common/props'
-import { Remount } from '@/components/remount'
 import { mergeProps, onCleanup, onMount } from 'solid-js'
 import { watch } from 'solid-uses'
 import { formContext } from '../form/context'
@@ -32,7 +31,7 @@ function FieldCore(props: JigeFieldCoreProps) {
 
   const [formState, formActions, formStaticData] = formContext.useContext()
   const Context = fieldContext.initial({
-    name: realProps.name,
+    name: () => realProps.name,
     validateDebounceMs: () => realProps.validateDebounceMs,
     validateOn: () => realProps.validateOn,
   })
@@ -50,12 +49,26 @@ function FieldCore(props: JigeFieldCoreProps) {
         fieldState.name,
         getValueFromPath(formStaticData.initialValues, fieldState.name),
       )
-      formActions.setState('errorFields', fieldState.name, undefined!)
       formActions.setState('dirtyFields', fieldState.name, undefined!)
     }
 
+    formActions.setState('errorFields', fieldState.name, undefined!)
     formActions.setState('validateFields', fieldState.name, undefined!)
   })
+
+  watch(
+    () => realProps.name,
+    (name) => {
+      fieldActions.setValue(
+        undefinedOr(
+          formActions.getFieldValue(name),
+          getValueFromPath(formStaticData.initialValues, name),
+        ),
+      )
+      fieldActions.setErrors(formState.errorFields[name] || [])
+    },
+    { defer: true },
+  )
 
   watch(
     () => formState.formData,
@@ -70,10 +83,12 @@ function FieldCore(props: JigeFieldCoreProps) {
     )
   })
 
-  watch([() => fieldState.name, () => fieldState.value], ([name, value]) => {
-    formActions.setFieldValue(name, value)
+  watch([() => fieldState.value], ([value]) => {
+    formActions.setFieldValue(fieldState.name, value)
 
-    fieldActions.setIsDirty(value !== getValueFromPath(formStaticData.initialValues, name))
+    fieldActions.setIsDirty(
+      value !== getValueFromPath(formStaticData.initialValues, fieldState.name),
+    )
   })
 
   watch(
@@ -91,6 +106,7 @@ function FieldCore(props: JigeFieldCoreProps) {
     formActions.setState('dirtyFields', realProps.name, isDirty)
   })
 
+  // reset
   watch(
     [() => formState.isDirty, () => formState.isTouched],
     ([isDirty, isTouched]) => {
@@ -125,9 +141,5 @@ function FieldCore(props: JigeFieldCoreProps) {
 }
 
 export function JigeFieldCore(props: JigeFieldCoreProps) {
-  return (
-    <Remount remountWhenChange={props.name}>
-      <FieldCore {...props} />
-    </Remount>
-  )
+  return <FieldCore {...props} />
 }

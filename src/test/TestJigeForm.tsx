@@ -1,6 +1,10 @@
 import { FormCore } from '@/build'
+import type { FieldArrayPath } from '@/components/jige-form/types/path'
 import { sleep } from 'radash'
+import { For } from 'solid-js'
 import * as v from 'valibot'
+import { createAutoAnimate } from '@formkit/auto-animate/solid'
+import { getUniqueId } from '@/components/jige-form/field'
 
 function valiFieldValidator(schema: v.GenericSchema | v.GenericSchemaAsync) {
   return async (value: any) => {
@@ -24,6 +28,7 @@ export default function TestJigeForm() {
     defaultValues: () => ({
       name: 'John Doe',
       email: 'test@111.com',
+      array: [] as { name: string; value: string }[],
     }),
     onSubmit: async (values) => {
       console.log('onSubmit', values)
@@ -35,8 +40,13 @@ export default function TestJigeForm() {
     }),
   })
 
+  const [state, , staticD] = form.context
+  type FormValues = typeof state.formData
+
+  const [parent] = createAutoAnimate()
+
   return (
-    <div class='flex'>
+    <div class='flex gap-2'>
       <FormCore staticFormInstance={form} class='flex-1'>
         <FormCore.Field name='name'>
           {(state, actions) => {
@@ -109,13 +119,84 @@ export default function TestJigeForm() {
             )
           }}
         </FormCore.Field>
-        <button type='submit'>{form.context[0].isSubmitting ? 'Submitting...' : 'Submit'}</button>
-        <button type='reset'>reset</button>
+        <div ref={parent}>
+          <FormCore.FieldArray<FormValues, FieldArrayPath<FormValues>> name='array'>
+            {(fieldArray) => (
+              <For each={fieldArray.items}>
+                {(_, index) => (
+                  <div>
+                    <FormCore.Field name={`array.${index()}.name`}>
+                      {(state, actions) => {
+                        return (
+                          <div>
+                            <div class='flex gap-2'>
+                              <input
+                                value={state.value || ''}
+                                onInput={(e) => {
+                                  actions.handleChange(e.target.value)
+                                }}
+                                onBlur={actions.handleBlur}
+                              />
+                              <button
+                                type='button'
+                                onClick={() => {
+                                  FormCore.methods.arrayInsert<FormValues>(form, 'array', {
+                                    at: index() + 1,
+                                    value: { name: `${getUniqueId()}`, value: 'new value' },
+                                  })
+                                }}
+                              >
+                                add
+                              </button>
+                              <button
+                                type='button'
+                                onClick={() => {
+                                  FormCore.methods.arrayRemove<FormValues>(form, 'array', {
+                                    at: index(),
+                                  })
+                                }}
+                              >
+                                remove
+                              </button>
+                            </div>
+                            <div>{state.errors.map((v) => v.message).join(',')}</div>
+                          </div>
+                        )
+                      }}
+                    </FormCore.Field>
+                  </div>
+                )}
+              </For>
+            )}
+          </FormCore.FieldArray>
+        </div>
+
+        <div class='flex gap-2'>
+          <button
+            type='button'
+            onClick={() => {
+              FormCore.methods.arrayInsert<FormValues>(form, 'array', {
+                value: { name: '', value: 'v' },
+              })
+            }}
+          >
+            Add
+          </button>
+          <button
+            type='button'
+            onClick={() => {
+              const [state, actions] = form.context
+              actions.setState('formData', 'array', state.formData.array.length - 1, undefined)
+            }}
+          >
+            delete
+          </button>
+          <button type='submit'>{form.context[0].isSubmitting ? 'Submitting...' : 'Submit'}</button>
+          <button type='reset'>reset</button>
+        </div>
       </FormCore>
-      <div class='b b-amber p-2 w-200px'>
-        <div>isDirty: {form.context[0].isDirty.toString()}</div>
-        <div>isTouched: {form.context[0].isTouched.toString()}</div>
-        <div>formData: {JSON.stringify(form.context[0].formData)}</div>
+      <div class='w-350px overflow-auto'>
+        <pre>{JSON.stringify(state, null, 2)}</pre>
       </div>
     </div>
   )
