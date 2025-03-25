@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.37.5](https://github.com/jige-ui/jige-core/compare/v0.37.4...v0.37.5) (2025-03-25)
+
+
+### Bug Fixes
+
+* trap focus and draggable fixed ([dca8360](https://github.com/jige-ui/jige-core/commit/dca83605b244de0f208e637568d3bb87db93136d))
+
 ## [0.37.4](https://github.com/jige-ui/jige-core/compare/v0.37.3...v0.37.4) (2025-03-25)
 
 
