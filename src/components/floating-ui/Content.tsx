@@ -5,8 +5,9 @@ import { mergeRefs } from '@solid-primitives/refs'
 import type { JSX } from 'solid-js'
 import { Show, onMount, splitProps } from 'solid-js'
 import { Portal } from 'solid-js/web'
-import { onClickOutside, useEventListener, watch } from 'solid-uses'
+import { onClickOutside, watch } from 'solid-uses'
 import { context } from './context'
+import { createElementBounds } from '@solid-primitives/bounds'
 
 function FloatingContentCore(
   props: {
@@ -25,11 +26,18 @@ function FloatingContentCore(
 
   let rootContent!: HTMLDivElement
 
+  const bounds = createElementBounds(() => state.refTrigger)
+
   onMount(() => {
     actions.updatePos()
-    console.log('update by CONTENT Mounted')
 
-    useEventListener(['resize', 'scroll'], actions.updatePos)
+    watch(
+      () => ({ ...bounds }),
+      (b) => {
+        actions.updatePos()
+        console.log('update by target changed')
+      },
+    )
 
     onClickOutside(
       state.refContent!,
@@ -46,6 +54,15 @@ function FloatingContentCore(
           if (!hasAnimation(rootContent)) {
             actions.setStatus(state.status.replace('ing', 'ed') as any)
           }
+        }
+      },
+    )
+
+    watch(
+      () => state.disabled,
+      (d) => {
+        if (d) {
+          actions.setOpen(false)
         }
       },
     )

@@ -13,7 +13,7 @@ function ManualTrigger() {
       }}
       value={state.status}
       onFocus={() => actions.setOpen(true)}
-      // onBlur={() => actions.setOpen(false)}
+      onBlur={() => actions.setOpen(false)}
     />
   )
 }
@@ -23,8 +23,8 @@ export default function TestFloatingUI() {
   const [placement, setPlacement] = createSignal('top')
   const [disabled, setDisabled] = createSignal(false)
   return (
-    <div class='pt-10 ml-40'>
-      <div class='overflow-auto h-250px w-full'>
+    <div class='pt-10 ml-40 '>
+      <div class='overflow-auto h-250px w-full mt-100'>
         <FloatingUiCore
           openDelay={3000}
           closeDelay={1500}
@@ -35,9 +35,7 @@ export default function TestFloatingUI() {
           floatingOption={{
             shift: true,
             flip: true,
-            offset: ({ rects }) => {
-              return -rects.floating.height / 2
-            },
+            offset: offset(),
           }}
         >
           <FloatingUiCore.Trigger>
@@ -49,13 +47,14 @@ export default function TestFloatingUI() {
                 e.preventDefault()
               }}
             >
-              <button type='button' class='btn'>
-                Button
-              </button>
+              <div class='w-100px h-200px' />
             </div>
             <FloatingUiCore.Arrow class='bg-white' size={8} />
           </FloatingUiCore.Content>
         </FloatingUiCore>
+        <div class='w-100px h-200px bg-red-200' />
+        <div class='w-100px h-200px bg-red-200' />
+        <div class='w-100px h-200px bg-red-200' />
       </div>
       <div>
         <input

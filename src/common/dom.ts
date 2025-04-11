@@ -27,7 +27,7 @@ export function hasAnimation(el: HTMLElement) {
 }
 
 export function uiRefreshDo(cb: () => void) {
-  requestAnimationFrame(cb)
+  requestAnimationFrame(() => requestAnimationFrame(cb))
 }
 
 // eslint-disable-next-line regexp/no-super-linear-backtracking

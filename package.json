@@ -17,9 +17,7 @@
   "module": "dist/build.js",
   "types": "dist/build.d.ts",
   "typesVersions": {},
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "lint": "pnpm exec biome check .",
     "lint:fix": "pnpm exec biome check --write .",
@@ -37,9 +35,9 @@
     "solid-js": "^1.9"
   },
   "dependencies": {
-    "@floating-ui/dom": "^1.6.12",
-    "@solid-primitives/refs": "^1.0.8",
-    "@solid-primitives/resize-observer": "^2.1.0",
+    "@floating-ui/dom": "^1.6.13",
+    "@solid-primitives/bounds": "^0.1.0",
+    "@solid-primitives/refs": "^1.1.0",
     "radash": "^12.1.0",
     "solid-focus-trap": "^0.1.9",
     "solid-uses": "^0.10.0"

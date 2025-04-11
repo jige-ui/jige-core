@@ -94,8 +94,8 @@ function FieldCore(props: JigeFieldCoreProps) {
   watch(
     [() => realProps.validators, () => getValueFromPath(formState.validate, fieldState.name)],
     ([validators, formLevelValidator]) => {
-      const realValidators = formLevelValidator ? [formLevelValidator] : []
-      validators && realValidators.push(...validators)
+      const realValidators = validators || []
+      formLevelValidator && realValidators.push(formLevelValidator)
       staticData.validators = realValidators
       formActions.setState('validateFields', fieldState.name, () => fieldActions.validate)
     },

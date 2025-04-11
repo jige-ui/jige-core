@@ -1,10 +1,10 @@
-import { createElementSize } from '@solid-primitives/resize-observer'
 import { createSignal } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { watch } from 'solid-uses'
 import context from './context'
 import type { DataType } from './types'
 import { normalizeData } from './types'
+import { createElementBounds } from '@solid-primitives/bounds'
 
 export default function Table(props: {
   data: DataType[]
@@ -14,7 +14,7 @@ export default function Table(props: {
   const Context = context.initial()
   const [state, actions] = Context.value
   const [ref, setRef] = createSignal<HTMLDivElement | null>(null)
-  const size = createElementSize(ref)
+  const bounds = createElementBounds(ref)
 
   watch(
     () => props.data,
@@ -23,15 +23,15 @@ export default function Table(props: {
       actions.setData(normalize[0])
       actions.setColsWidth(normalize[1])
       actions.setSafeList(normalize[2])
-      if (state.data.length && size.width) {
-        actions.refresh(size.width)
+      if (state.data.length && bounds.width) {
+        actions.refresh(bounds.width)
       }
     },
   )
 
-  watch([() => size.width, () => state.signalRefresh], () => {
-    if (size.width) {
-      actions.refresh(size.width)
+  watch([() => bounds.width, () => state.signalRefresh], ([w]) => {
+    if (w) {
+      actions.refresh(w)
     }
   })
 

@@ -7,7 +7,7 @@ export * from './components/context-menu'
 export * from './components/draggable'
 export * from './components/floating-ui'
 export * from './components/form-components'
-
+export * from './components/drawer'
 export * from './components/jige-form'
 export * from './components/modal'
 export * from './components/paginator'
