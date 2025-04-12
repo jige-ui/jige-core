@@ -26,16 +26,15 @@ function FloatingContentCore(
 
   let rootContent!: HTMLDivElement
 
-  const bounds = createElementBounds(() => state.refTrigger)
+  const targetBounds = createElementBounds(() => state.refTrigger)
+  const contentBounds = createElementBounds(() => state.refContent)
 
   onMount(() => {
-    actions.updatePos()
-
     watch(
-      () => ({ ...bounds }),
-      (b) => {
+      () => [{ ...targetBounds }, { ...contentBounds }],
+      () => {
         actions.updatePos()
-        console.log('update by target changed')
+        console.log('update by target or content state changed')
       },
     )
 

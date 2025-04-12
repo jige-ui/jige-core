@@ -8,6 +8,7 @@ import type {
   SizeOptions,
 } from '@floating-ui/dom'
 import { computePosition, flip, offset, shift, size } from '@floating-ui/dom'
+import { batch } from 'solid-js'
 import { createComponentState } from 'solid-uses'
 
 export const context = createComponentState({
@@ -99,10 +100,12 @@ export const context = createComponentState({
         strategy: 'fixed',
       })
 
-      actions.setX(x)
-      actions.setY(y)
-      actions.setState('middlewareData', middlewareData)
-      actions.setPlacement(placement)
+      batch(() => {
+        actions.setX(x)
+        actions.setY(y)
+        actions.setState('middlewareData', middlewareData)
+        actions.setPlacement(placement)
+      })
     },
   },
 })
