@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.38.0](https://github.com/jige-ui/jige-core/compare/v0.37.9...v0.38.0) (2025-04-14)
+
+
+### Features
+
+* table is rebuilt ([d4a5b9c](https://github.com/jige-ui/jige-core/commit/d4a5b9cf833742fd74a9f491273a60594735d263))
+
 ## [0.37.9](https://github.com/jige-ui/jige-core/compare/v0.37.8...v0.37.9) (2025-04-14)
 
 
