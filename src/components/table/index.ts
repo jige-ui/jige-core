@@ -1,10 +1,13 @@
+import { Cell } from './Cell'
+import { Column, TableHeader } from './Header'
+import { Row } from './Row'
 import Root from './Table'
-import TableBody from './TableBody'
-import TableHead from './TableHead'
+import { TableBody } from './TableBody'
 
 export const TableCore = Object.assign(Root, {
   Body: TableBody,
-  Head: TableHead,
+  Header: TableHeader,
+  Row,
+  Cell,
+  Column,
 })
-
-export type { DataType, HeaderType, SimpleData } from './types'
