@@ -67,7 +67,7 @@ export default function TestTable() {
         <TableHead ref={ref}>
           {(data) => (
             <th colspan={data.colspan} rowspan={data.rowspan} class='b'>
-              {data.data}
+              {data.key}
             </th>
           )}
         </TableHead>

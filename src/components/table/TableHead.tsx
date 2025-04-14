@@ -47,7 +47,7 @@ function parseKeys(data: DataType[]) {
         const tmp: HeaderType = {
           colspan: countStartInArray(keys, [...keySplit].slice(0, i + 1).join('.'), j),
           rowspan: keySplit.length === i + 1 ? rows - i : 1,
-          data: keySplit[i],
+          key: keySplit.slice(0, i + 1).join('.'),
         }
         headers[i].push(tmp)
         current = keySplit[i]

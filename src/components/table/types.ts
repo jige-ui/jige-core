@@ -8,7 +8,7 @@ export interface DataType {
 export interface HeaderType {
   colspan: number
   rowspan: number
-  data: string
+  key: string
 }
 
 export function normalizeData(
