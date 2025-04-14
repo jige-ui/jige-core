@@ -36,8 +36,8 @@ export function Column(
   })
 
   watch([() => local.width, isDirectColumn], ([w, isDirectColumn]) => {
-    actions.setState('colsWidth', id, (isDirectColumn ? w || 0 : undefined)!)
-    actions.setState('manualWidths', id, (isDirectColumn ? w : undefined)!)
+    actions.setState('colsWidth', id, (isDirectColumn ? w || 80 : undefined)!)
+    actions.setState('manualWidths', id, (isDirectColumn ? w || undefined : undefined)!)
   })
 
   return <th {...others} rowSpan={local.rowSpan} colSpan={local.colSpan} />

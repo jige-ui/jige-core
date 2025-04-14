@@ -9,6 +9,8 @@ const context = createComponentState({
   }),
   methods: {
     refresh(wrapperWidth: number) {
+      console.log(1)
+
       const { state, actions } = this
 
       const needSetWidth: string[] = []
