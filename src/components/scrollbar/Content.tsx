@@ -1,10 +1,10 @@
+import { createElementBounds } from '@solid-primitives/bounds'
 import { mergeRefs } from '@solid-primitives/refs'
 import { throttle } from 'radash'
 import type { JSX } from 'solid-js'
 import { createSignal, splitProps } from 'solid-js'
 import { watch } from 'solid-uses'
 import context from './context'
-import { createElementBounds } from '@solid-primitives/bounds'
 
 export default function Content(props: JSX.HTMLAttributes<HTMLDivElement>) {
   const [, action] = context.useContext()

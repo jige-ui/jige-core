@@ -1,3 +1,4 @@
+import type { Store } from 'solid-js/store'
 import { createComponentState } from 'solid-uses'
 import type {
   JigeFormAsyncValidator,
@@ -5,7 +6,6 @@ import type {
   JigeFormValidatorCorrectReturn,
 } from '../validator'
 import { normalizeValidator } from '../validator'
-import type { Store } from 'solid-js/store'
 
 export const fieldContext = createComponentState({
   state: () => ({

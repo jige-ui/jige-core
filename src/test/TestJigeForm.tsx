@@ -1,10 +1,10 @@
 import { FormCore } from '@/build'
+import { getUniqueId } from '@/components/jige-form/field'
 import type { FieldArrayPath } from '@/components/jige-form/types/path'
+import { createAutoAnimate } from '@formkit/auto-animate/solid'
 import { sleep } from 'radash'
 import { For } from 'solid-js'
 import * as v from 'valibot'
-import { createAutoAnimate } from '@formkit/auto-animate/solid'
-import { getUniqueId } from '@/components/jige-form/field'
 
 function valiFieldValidator(schema: v.GenericSchema | v.GenericSchemaAsync) {
   return async (value: any) => {

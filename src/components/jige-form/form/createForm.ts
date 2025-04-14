@@ -1,7 +1,7 @@
 import { watch } from 'solid-uses'
-import { formContext } from './context'
-import type { FormOptions } from '../types/form'
 import type { FieldValues } from '../types/field'
+import type { FormOptions } from '../types/form'
+import { formContext } from './context'
 
 export function createForm<T extends FieldValues>(params?: FormOptions<T>) {
   const Context = formContext.initial({

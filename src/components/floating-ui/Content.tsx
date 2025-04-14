@@ -1,13 +1,13 @@
 import { setData } from '@/common/dataset'
 import { hasAnimation } from '@/common/dom'
 import { runSolidEventHandler } from '@/common/solidjs'
+import { createElementBounds } from '@solid-primitives/bounds'
 import { mergeRefs } from '@solid-primitives/refs'
 import type { JSX } from 'solid-js'
 import { Show, onMount, splitProps } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { onClickOutside, watch } from 'solid-uses'
 import { context } from './context'
-import { createElementBounds } from '@solid-primitives/bounds'
 
 function FloatingContentCore(
   props: {

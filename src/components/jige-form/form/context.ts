@@ -1,9 +1,9 @@
 import type { AsyncFn, MaybeAsyncFn } from '@/common/types'
 import { isUndefined } from '@/common/types'
 import { createComponentState } from 'solid-uses'
+import { getUniqueId } from '../field'
 import { getValueFromPath } from '../utils'
 import type { JigeFormValidatorCorrectReturn } from '../validator'
-import { getUniqueId } from '../field'
 
 export const formContext = createComponentState({
   state: () => ({

@@ -1,5 +1,5 @@
-import { context } from './context'
 import { ModalCore } from '../modal'
+import { context } from './context'
 
 export function Root(props: Parameters<typeof ModalCore>[0] & {}) {
   const Context = context.initial()

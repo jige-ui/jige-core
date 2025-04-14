@@ -3,11 +3,11 @@ import type { PropsWithContextChild } from '@/common/props'
 import { callMaybeContextChild } from '@/common/props'
 import type { CloseableStatus } from '@/common/types'
 import { Ref } from '@solid-primitives/refs'
+import createFocusTrap from 'solid-focus-trap'
 import { createMemo, onCleanup, onMount, splitProps } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { useEventListener, watch } from 'solid-uses'
 import { GloablModalStore, context } from './context'
-import createFocusTrap from 'solid-focus-trap'
 
 export function Content(
   props: PropsWithContextChild<typeof context, JSX.HTMLAttributes<HTMLDivElement>>,

@@ -1,10 +1,10 @@
+import { createElementBounds } from '@solid-primitives/bounds'
 import { createSignal } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { watch } from 'solid-uses'
 import context from './context'
 import type { DataType } from './types'
 import { normalizeData } from './types'
-import { createElementBounds } from '@solid-primitives/bounds'
 
 export default function Table(props: {
   data: DataType[]

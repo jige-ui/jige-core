@@ -1,11 +1,11 @@
 import { combineStyle } from '@/common/dom'
-import { callMaybeContextChild, type PropsWithContextChild } from '@/common/props'
-import { context } from './context'
+import { type PropsWithContextChild, callMaybeContextChild } from '@/common/props'
 import { mergeRefs } from '@solid-primitives/refs'
-import { splitProps, type ComponentProps } from 'solid-js'
-import { ModalCore } from '../modal'
-import { watch } from 'solid-uses'
 import createFocusTrap from 'solid-focus-trap'
+import { type ComponentProps, splitProps } from 'solid-js'
+import { watch } from 'solid-uses'
+import { ModalCore } from '../modal'
+import { context } from './context'
 
 export function Content(
   props: PropsWithContextChild<typeof context, Omit<ComponentProps<'div'>, 'children'>>,

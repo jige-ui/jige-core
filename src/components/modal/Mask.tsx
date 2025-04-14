@@ -1,8 +1,8 @@
 import { combineStyle } from '@/common/dom'
+import { runSolidEventHandler } from '@/common/solidjs'
 import { splitProps } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { context } from './context'
-import { runSolidEventHandler } from '@/common/solidjs'
 
 export function Mask(props: JSX.HTMLAttributes<HTMLDivElement>) {
   const [local, others] = splitProps(props, ['style', 'onClick'])
