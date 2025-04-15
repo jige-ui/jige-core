@@ -10,11 +10,25 @@ const context = createComponentState({
   }),
   getters: {
     sortedColsKeys() {
-      const keys = Object.keys(this.state.colsKeys).filter((key) => this.state.colsKeys[key])
       const headerDom = this.state.headerScrollRef
-      if (keys.length === 0 || !headerDom) return []
-      console.log('sortedColsKeys')
+      if (!headerDom) return []
 
+      // make sure all cols is leaf
+      const keys = Object.keys(this.state.colsKeys).filter((key) => {
+        if (!this.state.colsKeys[key]) return false
+        const th = headerDom.querySelector(`th[data-key="${key}"]`)
+        if (!th) return false
+        // check if the th's rowIndex+rowSpan is equal to total row count
+        const rowIndex = (th.parentElement as HTMLTableRowElement)?.rowIndex
+        const rowSpan = th.getAttribute('rowSpan')
+        const rowSpanNum = rowSpan ? Number(rowSpan) : 1
+        const rowCount = headerDom.querySelectorAll('tr').length
+        if (rowIndex + rowSpanNum > rowCount) return false
+        return true
+      })
+
+      if (keys.length === 0) return []
+      console.log('sortedColsKeys')
       return keys.sort((a, b) => {
         const aLeft =
           headerDom?.querySelector(`th[data-key="${a}"]`)?.getBoundingClientRect().left || 0

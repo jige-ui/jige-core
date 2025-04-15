@@ -27,7 +27,8 @@ export function Column(
 
   const id = `col-${createUniqueId()}`
 
-  const isDirectColumn = createMemo(() => {
+  // maybe not , when colSpan == 1 but row is not bottom
+  const isLeafColumn = createMemo(() => {
     const colSpan = Number(local.colSpan || 0)
     return colSpan <= 1
   })
@@ -37,10 +38,10 @@ export function Column(
     actions.setState('colsKeys', id, undefined!)
   })
 
-  watch([() => local.width, isDirectColumn], ([w, isDirectColumn]) => {
-    actions.setState('colsWidth', id, (isDirectColumn ? w || 80 : undefined)!)
-    actions.setState('colsKeys', id, isDirectColumn)
-    actions.setState('manualWidths', id, (isDirectColumn ? w || undefined : undefined)!)
+  watch([() => local.width, isLeafColumn], ([w, isLeafColumn]) => {
+    actions.setState('colsWidth', id, (isLeafColumn ? w || 80 : undefined)!)
+    actions.setState('colsKeys', id, isLeafColumn)
+    actions.setState('manualWidths', id, (isLeafColumn ? w || undefined : undefined)!)
   })
 
   return (
@@ -49,7 +50,6 @@ export function Column(
       rowSpan={local.rowSpan}
       colSpan={local.colSpan}
       {...setData({
-        leaf: isDirectColumn(),
         key: id,
       })}
     />
