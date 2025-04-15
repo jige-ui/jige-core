@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.38.2](https://github.com/jige-ui/jige-core/compare/v0.38.1...v0.38.2) (2025-04-15)
+
+
+### Bug Fixes
+
+* check leaf col ([c2479b5](https://github.com/jige-ui/jige-core/commit/c2479b51038d84f8a14153b9a8e254b3b8078abb))
+
 ## [0.38.1](https://github.com/jige-ui/jige-core/compare/v0.38.0...v0.38.1) (2025-04-15)
 
 
