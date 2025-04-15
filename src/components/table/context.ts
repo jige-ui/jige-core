@@ -23,7 +23,7 @@ const context = createComponentState({
         const rowSpan = th.getAttribute('rowSpan')
         const rowSpanNum = rowSpan ? Number(rowSpan) : 1
         const rowCount = headerDom.querySelectorAll('tr').length
-        if (rowIndex + rowSpanNum > rowCount) return false
+        if (rowIndex + rowSpanNum < rowCount) return false
         return true
       })
 
