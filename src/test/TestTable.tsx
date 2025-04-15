@@ -44,13 +44,13 @@ export default function TestTable() {
         >
           <TableCore.Header class='bg-gray-2 b b-b-cyan'>
             <TableCore.Row>
+              <TableCore.Column rowSpan={1} colSpan={2}>
+                信息
+              </TableCore.Column>
               <TableCore.Column rowSpan={2}>名字</TableCore.Column>
               <TableCore.Column rowSpan={2}>年龄</TableCore.Column>
               <TableCore.Column rowSpan={2}>性别</TableCore.Column>
               <TableCore.Column rowSpan={2}>地址</TableCore.Column>
-              <TableCore.Column rowSpan={1} colSpan={2}>
-                信息
-              </TableCore.Column>
             </TableCore.Row>
             <TableCore.Row>
               <TableCore.Column width={125}>电话</TableCore.Column>
@@ -70,12 +70,12 @@ export default function TestTable() {
                 <For each={data()}>
                   {(item) => (
                     <TableCore.Row>
+                      <TableCore.Cell class='p-1'>{item['info.phone']}</TableCore.Cell>
+                      <TableCore.Cell class='p-1'>{item['info.email']}</TableCore.Cell>
                       <TableCore.Cell class='p-1'>{item.name}</TableCore.Cell>
                       <TableCore.Cell class='p-1'>{item.age}</TableCore.Cell>
                       <TableCore.Cell class='p-1'>{item.sex}</TableCore.Cell>
                       <TableCore.Cell class='p-1'>{item.address}</TableCore.Cell>
-                      <TableCore.Cell class='p-1'>{item['info.phone']}</TableCore.Cell>
-                      <TableCore.Cell class='p-1'>{item['info.email']}</TableCore.Cell>
                     </TableCore.Row>
                   )}
                 </For>

@@ -2,14 +2,31 @@ import { createComponentState } from 'solid-uses'
 
 const context = createComponentState({
   state: () => ({
+    colsKeys: {} as Record<string, boolean>,
     colsWidth: {} as Record<string, number>,
     headerScrollRef: null as HTMLDivElement | null,
     manualWidths: {} as Record<string, number>,
     width: 0,
   }),
+  getters: {
+    sortedColsKeys() {
+      const keys = Object.keys(this.state.colsKeys).filter((key) => this.state.colsKeys[key])
+      const headerDom = this.state.headerScrollRef
+      if (keys.length === 0 || !headerDom) return []
+      console.log('sortedColsKeys')
+
+      return keys.sort((a, b) => {
+        const aLeft =
+          headerDom?.querySelector(`th[data-key="${a}"]`)?.getBoundingClientRect().left || 0
+        const bLeft =
+          headerDom?.querySelector(`th[data-key="${b}"]`)?.getBoundingClientRect().left || 0
+        return aLeft - bLeft
+      })
+    },
+  },
   methods: {
     refresh(wrapperWidth: number) {
-      console.log(1)
+      console.log('refresh')
 
       const { state, actions } = this
 

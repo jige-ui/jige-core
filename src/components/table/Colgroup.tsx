@@ -13,7 +13,7 @@ export default function Colgroup() {
   return (
     <>
       <colgroup>
-        <For each={Object.keys(state.colsWidth)}>{(k) => <Col key={k} />}</For>
+        <For each={state.sortedColsKeys}>{(k) => <Col key={k} />}</For>
       </colgroup>
     </>
   )
