@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.38.1](https://github.com/jige-ui/jige-core/compare/v0.38.0...v0.38.1) (2025-04-15)
+
+
+### Bug Fixes
+
+* col width not aligned ([0acc599](https://github.com/jige-ui/jige-core/commit/0acc599211a936ced76070467e374547b8712310))
+
 ## [0.38.0](https://github.com/jige-ui/jige-core/compare/v0.37.9...v0.38.0) (2025-04-14)
 
 
