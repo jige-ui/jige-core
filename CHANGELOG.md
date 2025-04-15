@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.38.4](https://github.com/jige-ui/jige-core/compare/v0.38.3...v0.38.4) (2025-04-15)
+
+
+### Bug Fixes
+
+* the NaN cause maximum call ([544ec55](https://github.com/jige-ui/jige-core/commit/544ec5545083bddb6c5c18a3768cb6250c8a96cd))
+
 ## [0.38.3](https://github.com/jige-ui/jige-core/compare/v0.38.2...v0.38.3) (2025-04-15)
 
 
