@@ -35,7 +35,8 @@ export const fieldContext = createComponentState({
     },
     handleChange<T>(value: T) {
       console.log('handleChange', value)
-      if (this.state.value === value) return
+      if (this.state.value === value || (Number.isNaN(value) && Number.isNaN(this.state.value)))
+        return
       if (!this.state.isTouched) {
         this.actions.setIsTouched(true)
       }
