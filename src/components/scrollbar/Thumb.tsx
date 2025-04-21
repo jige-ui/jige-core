@@ -1,4 +1,3 @@
-import { setData } from '@/common/dataset'
 import type { JSX } from 'solid-js'
 import { createMemo, createSignal, onMount, splitProps } from 'solid-js'
 import { useEventListener } from 'solid-uses'
@@ -76,9 +75,7 @@ export default function Thumb(
     <div
       {...others}
       ref={ref}
-      {...setData({
-        'scrollbar-dragging': state.isDragging,
-      })}
+      data-scrollbar-dragging={state.isDragging}
       style={Object.assign({}, local.style, {
         transform: `translate${isVertical() ? 'Y' : 'X'}(${transforms()}%)`,
         height: `${isVertical() ? `${length()}px` : '100%'}`,

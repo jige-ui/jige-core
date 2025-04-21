@@ -1,4 +1,3 @@
-import { setData } from '@/common/dataset'
 import { runSolidEventHandler } from '@/common/solidjs'
 import { mergeRefs } from '@solid-primitives/refs'
 import type { JSX } from 'solid-js'
@@ -58,9 +57,7 @@ export default function Thumb(props: JSX.HTMLAttributes<HTMLDivElement>) {
         startValue = state.value
         runSolidEventHandler(e, localProps.onMouseDown)
       }}
-      {...setData({
-        'slider-dragging': state.isDragging,
-      })}
+      data-slider-dragging={state.isDragging}
     />
   )
 }

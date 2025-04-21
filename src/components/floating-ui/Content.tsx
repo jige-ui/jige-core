@@ -1,4 +1,3 @@
-import { setData } from '@/common/dataset'
 import { hasAnimation } from '@/common/dom'
 import { runSolidEventHandler } from '@/common/solidjs'
 import { createElementBounds } from '@solid-primitives/bounds'
@@ -82,10 +81,8 @@ function FloatingContentCore(
     >
       <div
         {...otherProps}
-        {...setData({
-          'floating-status': state.status,
-          'floating-placement': state.placement,
-        })}
+        data-floating-status={state.status}
+        data-floating-placement={state.placement}
         ref={mergeRefs(localProps.ref, (el) => {
           rootContent = el
         })}

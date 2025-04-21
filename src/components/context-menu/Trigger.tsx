@@ -1,4 +1,3 @@
-import { setData } from '@/common/dataset'
 import type { ValidComponent } from 'solid-js'
 import { splitProps } from 'solid-js'
 import type { DynamicProps } from 'solid-js/web'
@@ -20,7 +19,7 @@ export function Trigger<T extends ValidComponent = 'div'>(
         actions.setY(e.clientY)
         actions.setOpen(state.status === 'closed')
       }}
-      {...setData({ 'cm-status': state.status })}
+      data-cm-status={state.status}
     />
   )
 }

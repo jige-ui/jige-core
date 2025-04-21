@@ -3,7 +3,6 @@ import { watch } from 'solid-uses'
 import Colgroup from './Colgroup'
 import { NormalTable } from './common'
 import context from './context'
-import { setData } from '@/common/dataset'
 
 export function TableHeader(props: ComponentProps<'thead'>) {
   const [, actions] = context.useContext()
@@ -44,14 +43,5 @@ export function Column(
     actions.setState('manualWidths', id, (isLeafColumn ? w || undefined : undefined)!)
   })
 
-  return (
-    <th
-      {...others}
-      rowSpan={local.rowSpan}
-      colSpan={local.colSpan}
-      {...setData({
-        key: id,
-      })}
-    />
-  )
+  return <th {...others} rowSpan={local.rowSpan} colSpan={local.colSpan} data-key={id} />
 }
