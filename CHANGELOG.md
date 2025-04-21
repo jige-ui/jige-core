@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.39.0](https://github.com/jige-ui/jige-core/compare/v0.38.5...v0.39.0) (2025-04-21)
+
+
+### Features
+
+* remove `setData` which will cause the component re-render ([3ddb6ae](https://github.com/jige-ui/jige-core/commit/3ddb6ae7ef30a22ea87cd0ebf9220c9af30e06cf))
+
 ## [0.38.5](https://github.com/jige-ui/jige-core/compare/v0.38.4...v0.38.5) (2025-04-15)
 
 
