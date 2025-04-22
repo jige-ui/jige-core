@@ -1,6 +1,6 @@
 import type { PropsWithContextChild } from '@/common/props'
 import { callMaybeContextChild, undefinedOr } from '@/common/props'
-import { mergeProps, onCleanup, onMount } from 'solid-js'
+import { batch, mergeProps, onCleanup, onMount } from 'solid-js'
 import { watch } from 'solid-uses'
 import { formContext } from '../form/context'
 import { getValueFromPath } from '../utils'
@@ -51,23 +51,28 @@ function FieldCore(props: JigeFieldCoreProps) {
       )
       formActions.setState('dirtyFields', fieldState.name, undefined!)
     }
-
     formActions.setState('errorFields', fieldState.name, undefined!)
     formActions.setState('validateFields', fieldState.name, undefined!)
   })
 
   watch(
     () => realProps.name,
-    (name) => {
-      fieldActions.setValue(
-        undefinedOr(
-          formActions.getFieldValue(name),
-          getValueFromPath(formStaticData.initialValues, name),
-        ),
-      )
-      fieldActions.setErrors(formState.errorFields[name] || [])
+    (name, prevName) => {
+      if (prevName) {
+        batch(() => {
+          fieldActions.setValue(
+            undefinedOr(
+              formActions.getFieldValue(name),
+              getValueFromPath(formStaticData.initialValues, name),
+            ),
+          )
+          fieldActions.setErrors(formState.errorFields[name] || [])
+          fieldActions.setIsDirty(formState.dirtyFields[name] || false)
+          fieldActions.setIsTouched(true)
+        })
+      }
+      console.log('field name changed', prevName, name)
     },
-    { defer: true },
   )
 
   watch(
@@ -83,12 +88,9 @@ function FieldCore(props: JigeFieldCoreProps) {
     )
   })
 
-  watch([() => fieldState.value], ([value]) => {
-    formActions.setFieldValue(fieldState.name, value)
-
-    fieldActions.setIsDirty(
-      value !== getValueFromPath(formStaticData.initialValues, fieldState.name),
-    )
+  watch([() => fieldState.value, () => realProps.name], ([value, name]) => {
+    formActions.setFieldValue(name, value)
+    fieldActions.setIsDirty(value !== getValueFromPath(formStaticData.initialValues, name))
   })
 
   watch(
@@ -101,10 +103,13 @@ function FieldCore(props: JigeFieldCoreProps) {
     },
   )
 
-  watch([() => fieldState.isTouched, () => fieldState.isDirty], ([isTouched, isDirty]) => {
-    isTouched && formActions.setIsTouched(true)
-    formActions.setState('dirtyFields', realProps.name, isDirty)
-  })
+  watch(
+    [() => fieldState.isTouched, () => fieldState.isDirty, () => realProps.name],
+    ([isTouched, isDirty, name]) => {
+      isTouched && formActions.setIsTouched(true)
+      formActions.setState('dirtyFields', name, isDirty)
+    },
+  )
 
   // reset
   watch(

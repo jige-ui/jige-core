@@ -125,7 +125,7 @@ export default function TestJigeForm() {
               <For each={fieldArray.items}>
                 {(_, index) => (
                   <div>
-                    <FormCore.Field name={`array.${index()}.name`}>
+                    <FormCore.Field keepState={false} name={`array.${index()}.name`}>
                       {(state, actions) => {
                         return (
                           <div>
@@ -185,8 +185,9 @@ export default function TestJigeForm() {
           <button
             type='button'
             onClick={() => {
-              const [state, actions] = form.context
-              actions.setState('formData', 'array', state.formData.array.length - 1, undefined)
+              FormCore.methods.arrayRemove<FormValues>(form, 'array', {
+                at: form.context[0].formData.array.length - 1,
+              })
             }}
           >
             delete

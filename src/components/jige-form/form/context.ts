@@ -4,6 +4,7 @@ import { createComponentState } from 'solid-uses'
 import { getUniqueId } from '../field'
 import { getValueFromPath } from '../utils'
 import type { JigeFormValidatorCorrectReturn } from '../validator'
+import { batch } from 'solid-js'
 
 export const formContext = createComponentState({
   state: () => ({
@@ -73,24 +74,34 @@ export const formContext = createComponentState({
       this.actions.setIsSubmitting(false)
     },
     handleReset() {
-      const cloneInitialValues = JSON.parse(JSON.stringify(this.nowrapData.initialValues))
-      for (const key in this.state.formData) {
-        this.actions.setFieldValue(key, cloneInitialValues[key])
-      }
+      batch(() => {
+        const cloneInitialValues = JSON.parse(JSON.stringify(this.nowrapData.initialValues))
+        // value reset
+        for (const key in this.state.formData) {
+          this.actions.setFieldValue(key, cloneInitialValues[key])
+        }
 
-      for (const key in this.state.arrayFields) {
-        this.actions.setState(
-          'arrayFields',
-          key,
-          getValueFromPath(cloneInitialValues, key)?.map(() => getUniqueId()) || [],
-        )
-      }
+        // array fields reset
+        for (const key in this.state.arrayFields) {
+          this.actions.setState(
+            'arrayFields',
+            key,
+            getValueFromPath(cloneInitialValues, key)?.map(() => getUniqueId()) || [],
+          )
+        }
 
-      for (const key in this.state.dirtyFields) {
-        this.actions.setState('dirtyFields', key, undefined!)
-      }
+        // dirty fields reset
+        for (const key in this.state.dirtyFields) {
+          this.actions.setState('dirtyFields', key, undefined!)
+        }
 
-      this.actions.setIsTouched(false)
+        // error fields reset
+        for (const key in this.state.errorFields) {
+          this.actions.setState('errorFields', key, undefined!)
+        }
+
+        this.actions.setIsTouched(false)
+      })
     },
     async validateFields(
       key?: string,
@@ -110,6 +121,14 @@ export const formContext = createComponentState({
         }
       }
       return (key ? this.state.errorFields[key] : this.state.errorFields) as any
+    },
+
+    clearState(path: string) {
+      batch(() => {
+        this.actions.setState('dirtyFields', path, undefined!)
+        this.actions.setState('errorFields', path, undefined!)
+        this.actions.setState('validateFields', path, undefined!)
+      })
     },
   },
   nowrapData: () => ({
