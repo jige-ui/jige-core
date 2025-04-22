@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.39.1](https://github.com/jige-ui/jige-core/compare/v0.39.0...v0.39.1) (2025-04-22)
+
+
+### Bug Fixes
+
+* optimize array fields ([b44c9ce](https://github.com/jige-ui/jige-core/commit/b44c9cefa3573dea1d722d08cb7c40cb173101cd))
+
 ## [0.39.0](https://github.com/jige-ui/jige-core/compare/v0.38.5...v0.39.0) (2025-04-21)
 
 
