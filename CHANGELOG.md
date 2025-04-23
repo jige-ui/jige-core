@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.39.2](https://github.com/jige-ui/jige-core/compare/v0.39.1...v0.39.2) (2025-04-23)
+
+
+### Bug Fixes
+
+* optimize utils ([3b92899](https://github.com/jige-ui/jige-core/commit/3b92899279ae8979ef055d221d13f488954d7207))
+
 ## [0.39.1](https://github.com/jige-ui/jige-core/compare/v0.39.0...v0.39.1) (2025-04-22)
 
 
