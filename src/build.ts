@@ -1,5 +1,7 @@
 export * from './common/dom'
 export * from './common/props'
+export * from './common/dataset'
+export * from './common/solidjs'
 export * from './components/animated-group'
 export * from './components/circle-progress'
 export * from './components/collapsible'

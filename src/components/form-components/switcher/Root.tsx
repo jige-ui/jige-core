@@ -22,7 +22,7 @@ export function Control(props: {
       e.preventDefault()
     })
   })
-  return <Ref ref={ref}>{callMaybeContextChild(context, props.children)}</Ref>
+  return <Ref ref={ref}>{callMaybeContextChild(context.useContext(), props.children)}</Ref>
 }
 
 export function Root(
@@ -48,5 +48,9 @@ export function Root(
     },
   )
 
-  return <Context.Provider>{callMaybeContextChild(context, props.children)}</Context.Provider>
+  return (
+    <Context.Provider>
+      {callMaybeContextChild(context.useContext(), props.children)}
+    </Context.Provider>
+  )
 }

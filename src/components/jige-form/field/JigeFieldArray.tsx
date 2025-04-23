@@ -1,8 +1,8 @@
 import { type JSX, onCleanup } from 'solid-js'
+import { watch } from 'solid-uses'
 import { formContext } from '../form/context'
 import type { FieldValues } from '../types/field'
 import type { FieldArrayPath } from '../types/path'
-import { watch } from 'solid-uses'
 
 let counter = 0
 

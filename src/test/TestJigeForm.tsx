@@ -29,6 +29,7 @@ export default function TestJigeForm() {
       name: 'John Doe',
       email: 'test@111.com',
       array: [] as { name: string; value: string }[],
+      nestArray: [] as { name: string }[],
     }),
     onSubmit: async (values) => {
       console.log('onSubmit', values)

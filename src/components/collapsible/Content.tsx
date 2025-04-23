@@ -45,7 +45,7 @@ function CollapsibleContentMain(
         ref = r
       })}
     >
-      {callMaybeContextChild(context, localProps.children)}
+      {callMaybeContextChild(context.useContext(), localProps.children)}
     </div>
   )
 }

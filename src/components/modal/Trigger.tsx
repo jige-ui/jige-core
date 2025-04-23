@@ -25,7 +25,7 @@ export function Trigger(props: {
         }) as any
       }
     >
-      {callMaybeContextChild(context, props.children)}
+      {callMaybeContextChild(context.useContext(), props.children)}
     </Ref>
   )
 }

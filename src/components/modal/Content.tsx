@@ -77,7 +77,7 @@ export function Content(
       )}
       {...otherProps}
     >
-      <Ref ref={ref}>{callMaybeContextChild(context, localProps.children)}</Ref>
+      <Ref ref={ref}>{callMaybeContextChild(context.useContext(), localProps.children)}</Ref>
     </div>
   )
 }

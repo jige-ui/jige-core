@@ -51,7 +51,7 @@ export function Content(
       )}
       {...otherProps}
     >
-      {callMaybeContextChild(context, props.children)}
+      {callMaybeContextChild(context.useContext(), props.children)}
     </div>
   )
 }

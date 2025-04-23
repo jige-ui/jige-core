@@ -141,7 +141,9 @@ function FieldCore(props: JigeFieldCoreProps) {
   )
 
   return (
-    <Context.Provider>{callMaybeContextChild(fieldContext, realProps.children)}</Context.Provider>
+    <Context.Provider>
+      {callMaybeContextChild(fieldContext.useContext(), realProps.children)}
+    </Context.Provider>
   )
 }
 

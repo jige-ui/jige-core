@@ -38,7 +38,7 @@ export default function Track(
         runSolidEventHandler(e, localProps.onClick)
       }}
     >
-      {callMaybeContextChild(context, localProps.children)}
+      {callMaybeContextChild(context.useContext(), localProps.children)}
     </div>
   )
 }

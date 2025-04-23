@@ -83,7 +83,7 @@ function ItemControl(props: {
     })
   })
 
-  return <Ref ref={ref}>{callMaybeContextChild(context, props.children)}</Ref>
+  return <Ref ref={ref}>{callMaybeContextChild(context.useContext(), props.children)}</Ref>
 }
 
 export { Item, ItemControl, ItemNative }
