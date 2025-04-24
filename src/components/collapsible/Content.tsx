@@ -9,7 +9,10 @@ import { watch } from 'solid-uses'
 import context from './context'
 
 function CollapsibleContentMain(
-  props: PropsWithContextChild<typeof context, JSX.HTMLAttributes<HTMLDivElement>>,
+  props: PropsWithContextChild<
+    ReturnType<typeof context.useContext>,
+    JSX.HTMLAttributes<HTMLDivElement>
+  >,
 ) {
   const [localProps, otherProps] = splitProps(props, ['ref', 'style', 'children', 'onAnimationEnd'])
   const [state, actions] = context.useContext()

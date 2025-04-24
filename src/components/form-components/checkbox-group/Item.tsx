@@ -65,7 +65,7 @@ function ItemNative(
 }
 
 function ItemControl(props: {
-  children: MaybeContextChild<typeof context>
+  children: MaybeContextChild<ReturnType<typeof context.useContext>>
 }) {
   const [itemState] = itemContext.useContext()
 

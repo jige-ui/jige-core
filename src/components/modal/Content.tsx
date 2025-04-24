@@ -10,7 +10,10 @@ import { useEventListener, watch } from 'solid-uses'
 import { GloablModalStore, context } from './context'
 
 export function Content(
-  props: PropsWithContextChild<typeof context, JSX.HTMLAttributes<HTMLDivElement>>,
+  props: PropsWithContextChild<
+    ReturnType<typeof context.useContext>,
+    JSX.HTMLAttributes<HTMLDivElement>
+  >,
 ) {
   const [localProps, otherProps] = splitProps(props, ['children', 'style'])
   let ref!: HTMLElement

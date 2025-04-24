@@ -8,14 +8,17 @@ type ContextChild<T extends [{}, {}, {}]> = (
   actions: T[1],
   staticData: T[2],
 ) => JSX.Element
-export type MaybeContextChild<T extends Context> =
-  | ContextChild<ReturnType<T['useContext']>>
+export type MaybeContextChild<T extends ReturnType<Context['useContext']>> =
+  | ContextChild<T>
   | JSX.Element
-export type PropsWithContextChild<T extends Context, U> = Omit<U, 'children'> & {
+export type PropsWithContextChild<T extends ReturnType<Context['useContext']>, U> = Omit<
+  U,
+  'children'
+> & {
   children: MaybeContextChild<T>
 }
-export function callMaybeContextChild<T extends Context>(
-  context: ReturnType<T['useContext']>,
+export function callMaybeContextChild<T extends ReturnType<Context['useContext']>>(
+  context: T,
   children: MaybeContextChild<T>,
 ) {
   return typeof children === 'function' ? children(...(context as [{}, {}, {}])) : children

@@ -6,7 +6,7 @@ import { useEventListener, watch } from 'solid-uses'
 import context from './context'
 
 export function Trigger(props: {
-  children: MaybeContextChild<typeof context>
+  children: MaybeContextChild<ReturnType<typeof context.useContext>>
 }) {
   const [state, actions] = context.useContext()
   const [ref, setRef] = createSignal<HTMLElement>()

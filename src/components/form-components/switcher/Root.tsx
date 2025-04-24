@@ -6,7 +6,7 @@ import { useEventListener, watch } from 'solid-uses'
 import context from './context'
 
 export function Control(props: {
-  children: MaybeContextChild<typeof context>
+  children: MaybeContextChild<ReturnType<typeof context.useContext>>
 }) {
   const [state] = context.useContext()
   let ref!: HTMLElement
@@ -27,7 +27,7 @@ export function Control(props: {
 
 export function Root(
   props: PropsWithContextChild<
-    typeof context,
+    ReturnType<typeof context.useContext>,
     {
       checked?: boolean
       onChange?: (value: boolean) => void

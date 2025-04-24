@@ -8,7 +8,7 @@ import type { JigeFormAsyncValidator, JigeFormValidator } from '../validator'
 import { fieldContext } from './context'
 
 export type JigeFieldCoreProps = PropsWithContextChild<
-  typeof fieldContext,
+  ReturnType<typeof fieldContext.useContext>,
   {
     name: string
     validateDebounceMs?: number

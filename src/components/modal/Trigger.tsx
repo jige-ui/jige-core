@@ -6,7 +6,7 @@ import { useEventListener } from 'solid-uses'
 import { context } from './context'
 
 export function Trigger(props: {
-  children: MaybeContextChild<typeof context>
+  children: MaybeContextChild<ReturnType<typeof context.useContext>>
   ref?: HTMLElement | ((el: HTMLElement) => void)
 }) {
   let ref!: HTMLElement

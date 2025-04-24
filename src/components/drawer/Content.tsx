@@ -8,7 +8,10 @@ import { ModalCore } from '../modal'
 import { context } from './context'
 
 export function Content(
-  props: PropsWithContextChild<typeof context, Omit<ComponentProps<'div'>, 'children'>>,
+  props: PropsWithContextChild<
+    ReturnType<typeof context.useContext>,
+    Omit<ComponentProps<'div'>, 'children'>
+  >,
 ) {
   let ref!: HTMLDivElement
   const [localProps, otherProps] = splitProps(props, ['children', 'style', 'ref'])
