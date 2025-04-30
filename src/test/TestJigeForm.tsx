@@ -41,7 +41,7 @@ export default function TestJigeForm() {
     }),
   })
 
-  const [state, , staticD] = form.context
+  const [state] = form.context
   type FormValues = typeof state.formData
 
   const [parent] = createAutoAnimate()
@@ -89,7 +89,7 @@ export default function TestJigeForm() {
           }}
         </FormCore.Field>
         <FormCore.Field
-          name={form.context[0].formData.name}
+          name={'related'}
           keepState={false}
           validateRelatedFields={['name']}
           validators={[
@@ -182,6 +182,39 @@ export default function TestJigeForm() {
             }}
           >
             Add
+          </button>
+          <button
+            type='button'
+            onClick={() => {
+              FormCore.methods.arrayMove<FormValues>(form, 'array', {
+                from: 0,
+                to: state.formData.array.length - 1,
+              })
+            }}
+          >
+            move
+          </button>
+          <button
+            type='button'
+            onClick={() => {
+              FormCore.methods.arraySwap<FormValues>(form, 'array', {
+                at: 0,
+                and: state.formData.array.length - 1,
+              })
+            }}
+          >
+            swap
+          </button>
+          <button
+            type='button'
+            onClick={() => {
+              FormCore.methods.arrayReplace<FormValues>(form, 'array', {
+                at: 0,
+                value: { name: 'replace', value: 'replace' },
+              })
+            }}
+          >
+            replace
           </button>
           <button
             type='button'

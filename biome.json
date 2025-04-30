@@ -32,7 +32,11 @@
         "noBannedTypes": "off"
       },
       "correctness": {
-        "noUnusedImports": "error"
+        "noUnusedImports": "error",
+        "noUnusedVariables": "error"
+      },
+      "a11y": {
+        "useSemanticElements": "off"
       }
     }
   },

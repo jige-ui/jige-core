@@ -1,13 +1,12 @@
-import { batch } from 'solid-js'
 import type { createForm } from '../form'
 import type { FieldValues } from '../types/field'
 import type { FieldArrayPath, FieldArrayPathValue } from '../types/path'
 
-export function arrayInsert<TFieldValues extends FieldValues>(
+export function arrayReplace<TFieldValues extends FieldValues>(
   form: ReturnType<typeof createForm>,
   arrayPathName: FieldArrayPath<TFieldValues>,
   options: {
-    at?: number
+    at: number
     value: FieldArrayPathValue<TFieldValues, FieldArrayPath<TFieldValues>>[number] extends never
       ? any
       : FieldArrayPathValue<TFieldValues, FieldArrayPath<TFieldValues>>[number]
@@ -15,13 +14,12 @@ export function arrayInsert<TFieldValues extends FieldValues>(
 ) {
   const [, formActs] = form.context
 
-  batch(() => {
-    formActs.setFieldValue(arrayPathName, (prev: any[]) => {
-      const { at = prev.length, value } = options
-      const nextItems = [...prev]
-      nextItems.splice(at, 0, value)
+  const value = formActs.getFieldValue(arrayPathName)
+  const at = options.at
+  if (at < 0 || at >= value.length) {
+    return
+  }
 
-      return nextItems
-    })
-  })
+  const path = `${arrayPathName}.${at}`
+  formActs.setFieldValue(path, options.value)
 }

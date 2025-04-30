@@ -2,7 +2,6 @@ import type { AsyncFn, MaybeAsyncFn } from '@/common/types'
 import { isUndefined } from '@/common/types'
 import { batch } from 'solid-js'
 import { createComponentState } from 'solid-uses'
-import { getUniqueId } from '../field'
 import { getValueFromPath } from '../utils'
 import type { JigeFormValidatorCorrectReturn } from '../validator'
 
@@ -14,8 +13,7 @@ export const formContext = createComponentState({
     dirtyFields: {} as Record<string, boolean>,
     errorFields: {} as Record<string, JigeFormValidatorCorrectReturn[]>,
     validateFields: {} as Record<string, AsyncFn>,
-    arrayFields: {} as Record<string, number[]>,
-    // form-level validation
+    // form-level validate
     validate: {} as Record<string, any>,
   }),
   getters: {
@@ -79,15 +77,6 @@ export const formContext = createComponentState({
         // value reset
         for (const key in this.state.formData) {
           this.actions.setFieldValue(key, cloneInitialValues[key])
-        }
-
-        // array fields reset
-        for (const key in this.state.arrayFields) {
-          this.actions.setState(
-            'arrayFields',
-            key,
-            getValueFromPath(cloneInitialValues, key)?.map(() => getUniqueId()) || [],
-          )
         }
 
         // dirty fields reset

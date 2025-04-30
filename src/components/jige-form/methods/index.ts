@@ -1,2 +1,5 @@
 export * from './arrayInsert'
 export * from './arrayRemove'
+export * from './arrayMove'
+export * from './arraySwap'
+export * from './arrayReplace'
