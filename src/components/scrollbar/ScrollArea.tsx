@@ -9,7 +9,7 @@ export function ScrollArea(props: JSX.HTMLAttributes<HTMLDivElement>) {
   const [state, action] = context.useContext()
   const [local, others] = splitProps(props, ['children', 'onScroll', 'onScrollEnd', 'ref'])
 
-  const throttleSetValue = throttle({ interval: 30 }, action.setValue)
+  const throttleSetValue = throttle({ interval: 15 }, action.setValue)
 
   return (
     <div
