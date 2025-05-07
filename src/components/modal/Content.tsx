@@ -16,6 +16,7 @@ export function Content(
 ) {
   const [localProps, otherProps] = splitProps(props, ['children', 'style'])
   let ref!: HTMLElement
+  let wrapperRef!: HTMLDivElement
   const [state, actions] = context.useContext()
   const [gs, setGs] = GlobalModalStore
 
@@ -28,7 +29,10 @@ export function Content(
     })
 
     ref.style.pointerEvents = 'auto'
-    ref.click()
+
+    wrapperRef.tabIndex = 0
+    wrapperRef.focus()
+    wrapperRef.tabIndex = -1
 
     useEventListener(ref, 'animationend', () => {
       actions.setStatus(state.status.replace('ing', 'ed') as CloseableStatus)
@@ -64,7 +68,7 @@ export function Content(
   })
   return (
     <div
-      tabIndex={-1}
+      ref={wrapperRef}
       style={combineStyle(
         {
           position: 'fixed',

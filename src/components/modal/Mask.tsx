@@ -15,15 +15,12 @@ export function Mask(props: JSX.HTMLAttributes<HTMLDivElement>) {
   })
 
   return (
-    // biome-ignore lint/a11y/noAriaHiddenOnFocusable: <explanation>
     <div
       {...others}
       ref={mergeRefs(local.ref, (el) => {
         ref = el
       })}
       aria-hidden='true'
-      // biome-ignore lint/a11y/noNoninteractiveTabindex: <explanation>
-      tabIndex={0}
       data-modal-status={state.status}
       style={combineStyle(
         {
