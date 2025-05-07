@@ -37,5 +37,15 @@ export function Trigger(props: {
     refTrigger.setAttribute('data-floating-placement', placement)
   })
 
-  return <Ref ref={mergeRefs(props.ref, actions.setRefTrigger) as any}>{props.children}</Ref>
+  return (
+    <Ref
+      ref={
+        mergeRefs(props.ref, (el) => {
+          actions.setState('refTrigger', el)
+        }) as any
+      }
+    >
+      {props.children}
+    </Ref>
+  )
 }

@@ -1,6 +1,5 @@
 import {
   CheckboxGroupCore,
-  FloatingUiCore,
   FormCore,
   InputCore,
   RadioGroupCore,
@@ -8,27 +7,9 @@ import {
   SwitcherCore,
 } from '@/build'
 import { sleep } from 'radash'
-import { For, createSignal, onMount } from 'solid-js'
+import { For, createSignal } from 'solid-js'
 import { watch } from 'solid-uses'
 import './test.css'
-
-function SelectHeightBind() {
-  const state = FloatingUiCore.useContext()[0]
-
-  onMount(() => {
-    watch(
-      () => state.placement,
-      () => {
-        state.refContent?.style.setProperty(
-          '--content-transform-origin',
-          state.placement === 'bottom' ? 'top center' : 'bottom center',
-        )
-      },
-    )
-  })
-
-  return <></>
-}
 
 function CheckboxGroup() {
   const [fieldState, fieldActions] = FormCore.useField()

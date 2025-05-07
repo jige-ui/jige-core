@@ -24,7 +24,7 @@ function CollapsibleContentMain(
       if (state.status.endsWith('ing')) {
         setHeight(`${getElementHeight(ref)}px`)
         if (!hasAnimation(ref)) {
-          actions.setStatus(state.status.replace('ing', 'ed') as any)
+          actions.setState('status', state.status.replace('ing', 'ed') as any)
         }
       }
     })
@@ -37,10 +37,10 @@ function CollapsibleContentMain(
       style={combineStyle({ '--el-height': height() }, localProps.style)}
       onAnimationEnd={(e) => {
         if (state.status === 'opening') {
-          actions.setStatus('opened')
+          actions.setState('status', 'opened')
         }
         if (state.status === 'closing') {
-          actions.setStatus('closed')
+          actions.setState('status', 'closed')
         }
         runSolidEventHandler(e, localProps.onAnimationEnd)
       }}

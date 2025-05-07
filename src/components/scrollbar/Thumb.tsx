@@ -65,7 +65,7 @@ export default function Thumb(
 
     useEventListener('mouseup', () => {
       isMove = false
-      action.setIsDragging(false)
+      action.setState('isDragging', false)
     })
   })
 
@@ -83,7 +83,7 @@ export default function Thumb(
       })}
       onMouseDown={(e) => {
         e.preventDefault()
-        action.setIsDragging(true)
+        action.setState('isDragging', true)
         isMove = true
         startX = e.clientX
         startY = e.clientY

@@ -17,7 +17,7 @@ export default function Native(
     <input
       {...otherProps}
       ref={mergeRefs(localProps.ref, (r) => {
-        actions.set$nativeEl(r)
+        actions.setState('$nativeEl', r)
       })}
       type='checkbox'
       style={hiddenStyle}
@@ -28,18 +28,18 @@ export default function Native(
       checked={state.checked}
       onChange={(e) => {
         e.stopPropagation()
-        actions.setChecked(e.target.checked)
+        actions.setState('checked', e.target.checked)
         state.$nativeEl!.checked = state.checked
         runSolidEventHandler(e, localProps.onChange)
       }}
       onFocus={(e) => {
         e.preventDefault()
-        actions.setFocused(true)
+        actions.setState('focused', true)
         runSolidEventHandler(e, localProps.onFocus)
       }}
       disabled={state.disabled}
       onBlur={(e) => {
-        actions.setFocused(false)
+        actions.setState('focused', false)
         runSolidEventHandler(e, localProps.onBlur)
       }}
     />

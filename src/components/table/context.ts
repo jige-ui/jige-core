@@ -60,9 +60,9 @@ const context = createComponentState({
 
       const minWidth = needSetWidth.length * 80 + constWidthCount
       if (wrapperWidth < minWidth) {
-        actions.setWidth(minWidth)
+        actions.setState('width', minWidth)
       } else {
-        actions.setWidth(0)
+        actions.setState('width', 0)
       }
 
       // calculate the width of each column which is not set manually
@@ -73,7 +73,7 @@ const context = createComponentState({
         )
       }
 
-      actions.setColsWidth(Object.assign({}, state.colsWidth, widths))
+      actions.setState('colsWidth', Object.assign({}, state.colsWidth, widths))
     },
   },
 })

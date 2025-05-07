@@ -7,7 +7,7 @@ import createFocusTrap from 'solid-focus-trap'
 import { createMemo, onCleanup, onMount, splitProps } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { useEventListener, watch } from 'solid-uses'
-import { GloablModalStore, context } from './context'
+import { GlobalModalStore, context } from './context'
 
 export function Content(
   props: PropsWithContextChild<
@@ -18,9 +18,9 @@ export function Content(
   const [localProps, otherProps] = splitProps(props, ['children', 'style'])
   let ref!: HTMLElement
   const [state, actions] = context.useContext()
-  const [gs, setGs] = GloablModalStore
+  const [gs, setGs] = GlobalModalStore
 
-  const isActived = createMemo(() => gs.stack[gs.stack.length - 1] === state.id)
+  const isActive = createMemo(() => gs.stack[gs.stack.length - 1] === state.id)
 
   onMount(() => {
     setGs('stack', (stack) => {
@@ -41,7 +41,7 @@ export function Content(
     })
 
     useEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && isActived() && state.closeOnEsc) {
+      if (e.key === 'Escape' && isActive() && state.closeOnEsc) {
         actions.setOpen(false)
       }
     })

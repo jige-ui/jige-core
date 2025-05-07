@@ -4,7 +4,7 @@ import { createRoot, createUniqueId } from 'solid-js'
 import { createStore } from 'solid-js/store'
 import { createComponentState, watch } from 'solid-uses'
 
-export const GloablModalStore = createRoot(() => {
+export const GlobalModalStore = createRoot(() => {
   const [state, setState] = createStore({
     closeAll: false,
     preventScrollIds: [] as string[],
@@ -29,6 +29,9 @@ export const context = createComponentState({
   }),
 
   methods: {
+    setStatus(status: CloseableStatus) {
+      this.actions.setState('status', status)
+    },
     setOpen(open: boolean) {
       const { state, actions } = this
       if (open && state.status.startsWith('open')) return
@@ -37,7 +40,7 @@ export const context = createComponentState({
     },
     preventBodyScroll(prevent: boolean) {
       const { state } = this
-      const [gs, setState] = GloablModalStore
+      const [gs, setState] = GlobalModalStore
 
       if (prevent) {
         if (gs.preventScrollIds.includes(state.id)) return

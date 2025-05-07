@@ -14,7 +14,7 @@ export function Fill(props: {
   watch(
     () => props.strokeWidth,
     () => {
-      actions.setFillWidth(props.strokeWidth)
+      actions.setState('fillWidth', props.strokeWidth)
     },
   )
   return (

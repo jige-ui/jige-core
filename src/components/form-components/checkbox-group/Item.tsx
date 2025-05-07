@@ -42,7 +42,7 @@ function ItemNative(
     <input
       {...otherProps}
       ref={mergeRefs(localProps.ref, (r) => {
-        itemActions.setNativeEl(r)
+        itemActions.setState('nativeEl', r)
       })}
       type='checkbox'
       style={hiddenStyle}

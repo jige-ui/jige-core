@@ -22,7 +22,9 @@ export default function Native(
       style={hiddenStyle}
       disabled={state.disabled}
       value={state.value}
-      ref={actions.set$nativeEl}
+      ref={(el) => {
+        actions.setState('$nativeEl', el)
+      }}
       onInput={(e) => {
         e.stopPropagation()
         actions.setValue(Number.parseInt(e.target.value))

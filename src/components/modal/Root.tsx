@@ -1,7 +1,7 @@
 import { isUndefined } from '@/common/types'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { watch } from 'solid-uses'
-import { GloablModalStore, context } from './context'
+import { GlobalModalStore, context } from './context'
 
 export function Root(props: {
   children: JSX.Element
@@ -18,7 +18,7 @@ export function Root(props: {
   })
   const [state, actions] = Context.value
 
-  const [globalState] = GloablModalStore
+  const [globalState] = GlobalModalStore
 
   watch(
     () => props.open,

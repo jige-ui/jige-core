@@ -22,7 +22,9 @@ export function ScrollArea(props: JSX.HTMLAttributes<HTMLDivElement>) {
         'max-height': state.maxHeight,
         'user-select': state.isDragging ? 'none' : undefined,
       }}
-      ref={mergeRefs(local.ref, (el) => action.setRefContent(el))}
+      ref={mergeRefs(local.ref, (el) => {
+        action.setState('refContent', el)
+      })}
       onScroll={(e) => {
         throttleSetValue()
         runSolidEventHandler(e, local.onScroll)

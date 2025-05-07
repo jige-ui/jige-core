@@ -77,7 +77,9 @@ function FloatingContentCore(
         'min-width': 'max-content',
         'pointer-events': 'auto',
       }}
-      ref={actions.setRefContent}
+      ref={(el) => {
+        actions.setState('refContent', el)
+      }}
     >
       <div
         {...otherProps}

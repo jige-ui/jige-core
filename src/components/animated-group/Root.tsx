@@ -14,9 +14,11 @@ export function Root(props: {
   watch(
     () => props.active,
     () => {
-      actions.setTryClose(state.active)
-      actions.setTryOpen(props.active)
-      actions.setActive('')
+      actions.setState({
+        active: '',
+        tryClose: state.active,
+        tryOpen: props.active,
+      })
     },
   )
 

@@ -3,7 +3,7 @@ import { Mask } from './Mask'
 import { Portal } from './Portal'
 import { Root } from './Root'
 import { Trigger } from './Trigger'
-import { GloablModalStore, context } from './context'
+import { GlobalModalStore, context } from './context'
 
 export const ModalCore = Object.assign(Root, {
   Trigger,
@@ -12,7 +12,7 @@ export const ModalCore = Object.assign(Root, {
   Mask,
   useContext: context.useContext,
   closeAll: () => {
-    const [, setState] = GloablModalStore
+    const [, setState] = GlobalModalStore
     setState('closeAll', true)
     setState('closeAll', false)
   },

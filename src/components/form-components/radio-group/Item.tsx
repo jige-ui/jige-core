@@ -39,7 +39,7 @@ function ItemNative(
       {...otherProps}
       class={props.class}
       ref={mergeRefs(localProps.ref, (r) => {
-        itemActions.setNativeEl(r)
+        itemActions.setState('nativeEl', r)
       })}
       type='radio'
       style={hiddenStyle}
@@ -50,7 +50,7 @@ function ItemNative(
       disabled={state.disabled || itemState.disabled}
       onChange={(e) => {
         e.stopPropagation()
-        e.target.checked && actions.setValue(itemState.value)
+        e.target.checked && actions.setState('value', itemState.value)
         runSolidEventHandler(e, localProps.onChange)
       }}
     />

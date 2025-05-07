@@ -65,11 +65,11 @@ export const formContext = createComponentState({
     },
     async handleSubmit() {
       await this.actions.validateFields()
-      this.actions.setIsTouched(true)
+      this.actions.setState('isTouched', true)
       if (!this.state.canSubmit) return
-      this.actions.setIsSubmitting(true)
+      this.actions.setState('isSubmitting', true)
       await this.nowrapData.onSubmit(this.state.formData)
-      this.actions.setIsSubmitting(false)
+      this.actions.setState('isSubmitting', false)
     },
     handleReset() {
       batch(() => {
@@ -89,7 +89,7 @@ export const formContext = createComponentState({
           this.actions.setState('errorFields', key, undefined!)
         }
 
-        this.actions.setIsTouched(false)
+        this.actions.setState('isTouched', false)
       })
     },
     async validateFields(

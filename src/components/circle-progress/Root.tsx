@@ -13,7 +13,7 @@ export function Root(props: {
   watch(
     () => props.gapDegree,
     () => {
-      actions.setGapDegree(props.gapDegree || 0)
+      actions.setState('gapDegree', props.gapDegree || 0)
     },
   )
 

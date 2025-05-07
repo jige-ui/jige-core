@@ -49,24 +49,24 @@ const context = createComponentState({
       const refContent = state.refContent
       const scollVTop = refContent.scrollTop
       const scrollVHeight = refContent.scrollHeight - refContent.clientHeight
-      actions.setDomVPer((refContent.clientHeight / refContent.scrollHeight) * 100)
+      actions.setState('domVPer', (refContent.clientHeight / refContent.scrollHeight) * 100)
 
       if (scrollVHeight === 0) {
-        actions.setVerticalPer(null)
+        actions.setState('verticalPer', null)
       } else {
         const scrollVPercent = (scollVTop / scrollVHeight) * 100
-        actions.setVerticalPer(scrollVPercent)
+        actions.setState('verticalPer', scrollVPercent)
       }
 
       const scollHTop = refContent.scrollLeft
       const scrollHWidth = refContent.scrollWidth - refContent.clientWidth
-      actions.setDomHPer((refContent.clientWidth / refContent.scrollWidth) * 100)
+      actions.setState('domHPer', (refContent.clientWidth / refContent.scrollWidth) * 100)
 
       if (scrollHWidth === 0) {
-        actions.setHorizontalPer(null)
+        actions.setState('horizontalPer', null)
       } else {
         const scrollHPercent = (scollHTop / scrollHWidth) * 100
-        actions.setHorizontalPer(scrollHPercent)
+        actions.setState('horizontalPer', scrollHPercent)
       }
     },
   },

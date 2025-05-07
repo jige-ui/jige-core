@@ -62,26 +62,32 @@ function ContentCore(props: ContentProps) {
 
     watch(status, (s) => {
       if (s === 'opened') {
-        actions.setHeight('')
-        actions.setMaxHeight('')
-        actions.setActive(localProps.key)
-        actions.setTryOpen('')
+        actions.setState({
+          height: '',
+          maxHeight: '',
+          active: localProps.key,
+          tryOpen: '',
+        })
       }
 
       if (s === 'closed') {
-        actions.setTryClose('')
+        actions.setState('tryClose', '')
       }
 
       const h = state.refHeights[localProps.key]
       if (s === 'closing') {
-        actions.setMaxHeight(`${h}px`)
-        actions.setHeight(`${state.contentHeight}px`)
+        actions.setState({
+          maxHeight: `${h}px`,
+          height: `${state.contentHeight}px`,
+        })
       }
 
       if (s === 'opening') {
         requestAnimationFrame(() => {
-          actions.setMaxHeight(`${h}px`)
-          actions.setHeight(`${state.contentHeight}px`)
+          actions.setState({
+            maxHeight: `${h}px`,
+            height: `${state.contentHeight}px`,
+          })
         })
       }
     })

@@ -1,0 +1,28 @@
+.ani-drawer[data-status="closing"] {
+  animation: drawer-close 200ms linear;
+}
+.ani-drawer[data-status="opening"] {
+  animation: drawer-open 200ms linear;
+}
+
+@keyframes drawer-close {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes drawer-open {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

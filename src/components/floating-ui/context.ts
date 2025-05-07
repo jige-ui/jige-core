@@ -40,6 +40,9 @@ export const context = createComponentState({
     },
   }),
   methods: {
+    setStatus(status: CloseableStatus) {
+      this.actions.setState('status', status)
+    },
     /* only for hover */
     setTimerOpen(open: boolean) {
       const { state, actions } = this
@@ -53,7 +56,8 @@ export const context = createComponentState({
         clearTimeout(state.timer)
       }
 
-      actions.setTimer(
+      actions.setState(
+        'timer',
         setTimeout(() => {
           actions.setOpen(open)
         }, duration),
@@ -101,10 +105,12 @@ export const context = createComponentState({
       })
 
       batch(() => {
-        actions.setX(x)
-        actions.setY(y)
+        actions.setState({
+          x,
+          y,
+          placement,
+        })
         actions.setState('middlewareData', middlewareData)
-        actions.setPlacement(placement)
       })
     },
   },

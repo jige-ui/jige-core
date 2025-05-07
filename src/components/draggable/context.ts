@@ -1,10 +1,10 @@
 import { isUndefined } from '@/common/types'
 import { createComponentState } from 'solid-uses'
-import type { DarggableStatus } from './types'
+import type { DraggableStatus } from './types'
 
 export const context = createComponentState({
   state: () => ({
-    status: 'ready' as DarggableStatus | 'ready',
+    status: 'ready' as DraggableStatus | 'ready',
     /**
      * the threshold of the distance before the drag starts. 'px'
      */
@@ -31,6 +31,9 @@ export const context = createComponentState({
     },
   },
   methods: {
+    setStatus(status: DraggableStatus) {
+      this.actions.setState('status', status)
+    },
     setX(x: number) {
       let realX = x
       const { left, right } = this.state.bounds
@@ -63,8 +66,10 @@ export const context = createComponentState({
       const transform = ref.style.transform
       ref.style.transform = 'none'
       const rect = ref.getBoundingClientRect()
-      this.actions.setInitialX(rect.x)
-      this.actions.setInitialY(rect.y)
+      this.actions.setState({
+        initialX: rect.x,
+        initialY: rect.y,
+      })
       ref.style.transform = transform
     },
 

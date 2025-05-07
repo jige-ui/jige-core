@@ -1,11 +1,12 @@
 import { callMaybeCallableChild } from '@/common/props'
-import { createMemo, type JSX, mergeProps, onCleanup, onMount } from 'solid-js'
+import { type JSX, mergeProps, onCleanup, onMount } from 'solid-js'
 import type { JigeFormAsyncValidator, JigeFormValidator } from '../validator'
 
-import { getFieldContext } from './fieldContext'
+import { watch } from 'solid-uses'
 import { formContext } from '../form/context'
 import { getValueFromPath } from '../utils'
-import { watch } from 'solid-uses'
+import { createFieldContext, type getFieldContext } from './fieldContext'
+import { FieldContext } from './context'
 
 export type JigeFieldCoreProps = {
   name: string
@@ -32,21 +33,13 @@ function FieldCore(props: JigeFieldCoreProps) {
     props,
   )
 
-  const [formState, formActs, formStatic] = formContext.useContext()
+  const [, formActs, formStatic] = formContext.useContext()
 
-  const context = createMemo(() => {
-    const realValidators = realProps.validators || []
-    const formLeverValidators = getValueFromPath(formState.validate, realProps.name)
-    formLeverValidators && realValidators.push(formLeverValidators)
-
-    const [state, actions] = getFieldContext(realProps.name, {
-      validateDebounceMs: realProps.validateDebounceMs || 50,
-      validateOn: realProps.validateOn || 'change',
-      validators: realProps.validators || [],
-      validateFirst: true,
-    })
-
-    return [state, actions, {}] as const
+  const context = createFieldContext(() => realProps.name, {
+    validateDebounceMs: () => realProps.validateDebounceMs || 50,
+    validateOn: () => realProps.validateOn || 'change',
+    validators: () => realProps.validators || [],
+    validateFirst: () => true,
   })
 
   onMount(() => {
@@ -59,7 +52,7 @@ function FieldCore(props: JigeFieldCoreProps) {
   })
 
   watch(
-    () => context()[0].value,
+    () => context[0].value,
     (v) => {
       if (v !== getValueFromPath(formStatic.initialValues, realProps.name)) {
         formActs.setState('dirtyFields', realProps.name, true)
@@ -70,21 +63,25 @@ function FieldCore(props: JigeFieldCoreProps) {
   )
 
   watch(
-    () => context()[0].isTouched,
+    () => context[0].isTouched,
     (v) => {
-      v && formActs.setIsTouched(v)
+      v && formActs.setState('isTouched', v)
     },
   )
 
   watch(
     () => realProps.validateRelatedFields.map((v) => formActs.getFieldValue(v)),
     () => {
-      context()[1].handleValidate()
+      context[1].handleValidate()
     },
     { defer: true },
   )
 
-  return <>{callMaybeCallableChild(realProps.children, ...context())}</>
+  return (
+    <FieldContext.Provider value={context}>
+      {callMaybeCallableChild(realProps.children, ...context)}
+    </FieldContext.Provider>
+  )
 }
 
 export function JigeFieldCore(props: JigeFieldCoreProps) {

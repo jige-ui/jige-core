@@ -11,7 +11,7 @@ export function Rail(props: {
   watch(
     () => props.strokeWidth,
     () => {
-      actions.setRailWidth(props.strokeWidth)
+      actions.setState('railWidth', props.strokeWidth)
     },
   )
 

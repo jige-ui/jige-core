@@ -7,7 +7,11 @@ import context from './context'
 export function TableHeader(props: ComponentProps<'thead'>) {
   const [, actions] = context.useContext()
   return (
-    <NormalTable ref={actions.setHeaderScrollRef}>
+    <NormalTable
+      ref={(el) => {
+        actions.setState('headerScrollRef', el)
+      }}
+    >
       <Colgroup />
       <thead {...props} />
     </NormalTable>

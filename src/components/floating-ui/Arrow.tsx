@@ -12,12 +12,12 @@ export function Arrow(props: {
   watch(
     () => finalProps.size,
     () => {
-      actions.setArrow(finalProps.size)
+      actions.setState('arrow', finalProps.size)
     },
   )
 
   onCleanup(() => {
-    actions.setArrow(0)
+    actions.setState('arrow', 0)
   })
 
   const getObjPos = (pos: string) => {

@@ -38,7 +38,7 @@ export default function Thumb(props: JSX.HTMLAttributes<HTMLDivElement>) {
 
     useEventListener('mouseup', () => {
       isDragging = false
-      actions.setIsDragging(false)
+      actions.setState('isDragging', false)
     })
   })
 
@@ -52,7 +52,7 @@ export default function Thumb(props: JSX.HTMLAttributes<HTMLDivElement>) {
         e.preventDefault()
         state.$nativeEl?.focus()
         isDragging = true
-        actions.setIsDragging(true)
+        actions.setState('isDragging', true)
         startPos = state.vertical ? e.clientY : e.clientX
         startValue = state.value
         runSolidEventHandler(e, localProps.onMouseDown)

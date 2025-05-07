@@ -2,33 +2,61 @@ import { hasAnimation } from '@/common/dom'
 import { Show, onMount } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { Portal } from 'solid-js/web'
-import { onClickOutside, watch } from 'solid-uses'
+import { useEventListener, watch } from 'solid-uses'
 import context from './context'
+import { createElementBounds } from '@solid-primitives/bounds'
 
 function ContentCore(
   props: { zindex?: number } & Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onAnimationEnd' | 'ref'>,
 ) {
   let rootContent!: HTMLDivElement
   const [state, actions] = context.useContext()
+  const targetBounds = createElementBounds(() => state.triggerEl)
+  const contentBounds = createElementBounds(() => state.contentEl)
   onMount(() => {
+    watch(
+      () => ({ ...targetBounds }),
+      () => {
+        actions.setOpen(false)
+      },
+      { defer: true },
+    )
+
+    watch(
+      () => ({ ...contentBounds, stateClientX: state.clientX, stateClientY: state.clientY }),
+      () => {
+        actions.updatePos()
+      },
+    )
+
     watch(
       () => state.status,
       () => {
         if (state.status.endsWith('ing')) {
           if (!hasAnimation(rootContent)) {
-            actions.setStatus(state.status.replace('ing', 'ed') as any)
+            actions.setState('status', state.status.replace('ing', 'ed') as any)
           }
         }
       },
     )
 
-    onClickOutside(rootContent, () => {
+    useEventListener('mouseup', (event) => {
+      const el = state.triggerEl
+      if (!el || el === event.target || event.composedPath().includes(el)) return
+      const contentEl = state.contentEl
+      if (!contentEl || contentEl === event.target || event.composedPath().includes(contentEl))
+        return
+
       actions.setOpen(false)
     })
   })
 
   return (
     <div
+      ref={(el) => {
+        actions.setState('contentEl', el)
+      }}
+      data-placement={state.placement}
       style={{
         transform: `translate3d(${state.x}px, ${state.y}px, 0px)`,
         top: 0,
@@ -41,14 +69,14 @@ function ContentCore(
     >
       <div
         {...props}
-        data-cm-status={state.status}
+        data-status={state.status}
         ref={rootContent}
         onAnimationEnd={() => {
           if (state.status.startsWith('clos')) {
-            actions.setStatus('closed')
+            actions.setState('status', 'closed')
           }
           if (state.status.startsWith('open')) {
-            actions.setStatus('opened')
+            actions.setState('status', 'opened')
           }
         }}
       />

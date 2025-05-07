@@ -8,10 +8,10 @@ const context = createComponentState({
   }),
   methods: {
     removeValue(value: string) {
-      this.actions.setValue([...this.state.value.filter((v) => v !== value)])
+      this.actions.setState('value', [...this.state.value.filter((v) => v !== value)])
     },
     pushValue(value: string) {
-      this.actions.setValue([...this.state.value, value])
+      this.actions.setState('value', [...this.state.value, value])
     },
   },
 })

@@ -17,7 +17,7 @@ export function Content(props: JSX.HTMLAttributes<HTMLDivElement>) {
         },
         localProps.style,
       )}
-      ref={mergeRefs(localProps.ref, (el) => actions.setTargetElement(el))}
+      ref={mergeRefs(localProps.ref, (el) => actions.setState('targetElement', el))}
     />
   )
 }
