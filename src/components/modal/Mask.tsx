@@ -1,16 +1,29 @@
 import { combineStyle } from '@/common/dom'
 import { runSolidEventHandler } from '@/common/solidjs'
-import { splitProps } from 'solid-js'
+import { onMount, splitProps } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { context } from './context'
+import { mergeRefs } from '@solid-primitives/refs'
 
 export function Mask(props: JSX.HTMLAttributes<HTMLDivElement>) {
-  const [local, others] = splitProps(props, ['style', 'onClick'])
+  const [local, others] = splitProps(props, ['style', 'onClick', 'ref'])
   const [state, actions] = context.useContext()
+  let ref!: HTMLDivElement
+
+  onMount(() => {
+    ref.focus()
+  })
+
   return (
+    // biome-ignore lint/a11y/noAriaHiddenOnFocusable: <explanation>
     <div
       {...others}
+      ref={mergeRefs(local.ref, (el) => {
+        ref = el
+      })}
       aria-hidden='true'
+      // biome-ignore lint/a11y/noNoninteractiveTabindex: <explanation>
+      tabIndex={0}
       data-modal-status={state.status}
       style={combineStyle(
         {

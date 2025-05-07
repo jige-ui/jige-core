@@ -36,6 +36,8 @@ export function Handler(props: {
       const rect = getElementRect($tar)
 
       actions.calcInitial()
+      actions.setX(rect.x)
+      actions.setY(rect.y)
 
       start = true
       startPos = { x: e.clientX, y: e.clientY }
