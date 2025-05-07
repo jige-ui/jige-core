@@ -1,7 +1,7 @@
 {
   "name": "jige-core",
   "type": "module",
-  "version": "0.39.3",
+  "version": "0.40.0",
   "packageManager": "pnpm@9.15.7",
   "description": "jige-ui's core primitives",
   "license": "MIT",
@@ -17,7 +17,9 @@
   "module": "dist/build.js",
   "types": "dist/build.d.ts",
   "typesVersions": {},
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "lint": "pnpm exec biome check .",
     "lint:fix": "pnpm exec biome check --write .",

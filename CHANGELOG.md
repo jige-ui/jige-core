@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.40.0](https://github.com/jige-ui/jige-core/compare/v0.39.3...v0.40.0) (2025-05-07)
+
+
+### Features
+
+* almost rebuilt the form-field core ([35e5f2d](https://github.com/jige-ui/jige-core/commit/35e5f2db2e240429b88e35636f5b12306176dfb1))
+* optimize structure ([dddbff7](https://github.com/jige-ui/jige-core/commit/dddbff77bd356e5a06ebfd849a3a4418734061d8))
+
+
+### Bug Fixes
+
+* make scroll more smooth ([5af1dc1](https://github.com/jige-ui/jige-core/commit/5af1dc1d99a20262c4da1a42cfb66e2da6489e7c))
+
 ## [0.39.3](https://github.com/jige-ui/jige-core/compare/v0.39.2...v0.39.3) (2025-04-24)
 
 ## [0.39.2](https://github.com/jige-ui/jige-core/compare/v0.39.1...v0.39.2) (2025-04-23)
