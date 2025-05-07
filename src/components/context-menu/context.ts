@@ -1,15 +1,15 @@
 import type { CloseableStatus } from '@/common/types'
 import {
-  computePosition,
-  type Placement,
   type Derivable,
   type FlipOptions,
   type OffsetOptions,
+  type Placement,
   type ShiftOptions,
   type SizeOptions,
+  computePosition,
+  flip,
   offset,
   shift,
-  flip,
   size,
 } from '@floating-ui/dom'
 import { batch } from 'solid-js'

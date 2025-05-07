@@ -3,7 +3,6 @@ import type { PropsWithContextChild } from '@/common/props'
 import { callMaybeContextChild } from '@/common/props'
 import type { CloseableStatus } from '@/common/types'
 import { Ref } from '@solid-primitives/refs'
-import createFocusTrap from 'solid-focus-trap'
 import { createMemo, onCleanup, onMount, splitProps } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { useEventListener, watch } from 'solid-uses'
@@ -30,11 +29,6 @@ export function Content(
 
     ref.style.pointerEvents = 'auto'
     ref.click()
-
-    createFocusTrap({
-      element: () => ref,
-      enabled: () => state.status === 'opened',
-    })
 
     useEventListener(ref, 'animationend', () => {
       actions.setStatus(state.status.replace('ing', 'ed') as CloseableStatus)

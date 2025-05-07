@@ -1,9 +1,9 @@
+import { mergeRefs } from '@solid-primitives/refs'
 import type { ValidComponent } from 'solid-js'
 import { splitProps } from 'solid-js'
 import type { DynamicProps } from 'solid-js/web'
 import { Dynamic } from 'solid-js/web'
 import context from './context'
-import { mergeRefs } from '@solid-primitives/refs'
 
 export function Trigger<T extends ValidComponent = 'div'>(
   props: { as?: T; ref?: HTMLElement | ((el: HTMLElement) => void) } & Omit<

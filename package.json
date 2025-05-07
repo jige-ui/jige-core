@@ -17,9 +17,7 @@
   "module": "dist/build.js",
   "types": "dist/build.d.ts",
   "typesVersions": {},
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "lint": "pnpm exec biome check .",
     "lint:fix": "pnpm exec biome check --write .",
@@ -41,7 +39,6 @@
     "@solid-primitives/bounds": "^0.1.0",
     "@solid-primitives/refs": "^1.1.0",
     "radash": "^12.1.0",
-    "solid-focus-trap": "^0.1.9",
     "solid-uses": "^0.11.0"
   },
   "devDependencies": {

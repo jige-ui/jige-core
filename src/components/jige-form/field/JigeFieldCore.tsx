@@ -5,8 +5,8 @@ import type { JigeFormAsyncValidator, JigeFormValidator } from '../validator'
 import { watch } from 'solid-uses'
 import { formContext } from '../form/context'
 import { getValueFromPath } from '../utils'
-import { createFieldContext, type getFieldContext } from './fieldContext'
 import { FieldContext } from './context'
+import { createFieldContext, type getFieldContext } from './fieldContext'
 
 export type JigeFieldCoreProps = {
   name: string
