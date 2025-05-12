@@ -2,22 +2,22 @@ import type { JSX } from 'solid-js/jsx-runtime'
 import { watch } from 'solid-uses'
 import context from './context'
 
-export function Root(props: {
+export function Root<TValue = string | number>(props: {
   children: JSX.Element
   name?: string
-  value?: string
-  onChange?: (v: string) => void
+  value?: TValue
+  onChange?: (v: TValue) => void
   disabled?: boolean
 }) {
   const Context = context.initial({
-    value: () => props.value,
+    value: () => props.value as string,
     name: () => props.name,
     disabled: () => props.disabled,
   })
   const [state] = Context.value
 
   watch(
-    () => state.value,
+    () => state.value as TValue,
     (v) => {
       props.onChange?.(v)
     },

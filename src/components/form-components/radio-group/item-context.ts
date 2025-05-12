@@ -2,7 +2,7 @@ import { createComponentState } from 'solid-uses'
 
 const itemContext = createComponentState({
   state: () => ({
-    value: '',
+    value: '' as string | number,
     nativeEl: null as HTMLInputElement | null,
     disabled: false,
   }),

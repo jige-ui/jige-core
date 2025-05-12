@@ -9,13 +9,13 @@ import { useEventListener } from 'solid-uses'
 import context from './context'
 import itemContext from './item-context'
 
-function Item(props: {
+function Item<TValue = string | number>(props: {
   children: JSX.Element
-  value: string
+  value: TValue
   disabled?: boolean
 }) {
   const Context = itemContext.initial({
-    value: () => props.value,
+    value: () => props.value as string,
     disabled: () => props.disabled,
   })
 

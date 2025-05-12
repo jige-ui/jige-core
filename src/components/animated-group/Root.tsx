@@ -4,7 +4,6 @@ import context from './context'
 
 export function Root(props: {
   active: string
-  onChange: (value: string) => void
   children: JSX.Element
   class?: string
 }) {
@@ -19,13 +18,6 @@ export function Root(props: {
         tryClose: state.active,
         tryOpen: props.active,
       })
-    },
-  )
-
-  watch(
-    () => state.active,
-    () => {
-      state.active && props.onChange(state.active)
     },
   )
 

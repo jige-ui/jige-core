@@ -3,7 +3,7 @@ import { createComponentState } from 'solid-uses'
 
 const context = createComponentState({
   state: () => ({
-    value: '',
+    value: '' as string | number,
     name: `radio-group-${createUniqueId()}`,
     disabled: false,
   }),

@@ -47,7 +47,7 @@ export default function TestTabs() {
           />
         </div>
       </RadioGroupCore>
-      <AnimatedGroup active={active()} onChange={setActive} class='tab-wrapper bg-gray-2 '>
+      <AnimatedGroup active={active()} class='tab-wrapper bg-gray-2 '>
         <For each={['apple', 'food', 'air']}>
           {(item) => (
             <AnimatedGroup.Panel key={item} class='p-5 test-tab' data-dir={dir()}>
