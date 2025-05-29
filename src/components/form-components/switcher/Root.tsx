@@ -2,8 +2,9 @@ import type { MaybeContextChild, PropsWithContextChild } from '@/common/props'
 import { callMaybeContextChild } from '@/common/props'
 import { Ref } from '@solid-primitives/refs'
 import { onMount } from 'solid-js'
-import { useEventListener, watch } from 'solid-uses'
+import { watch } from 'solid-uses'
 import context from './context'
+import { makeEventListener } from '@solid-primitives/event-listener'
 
 export function Control(props: {
   children: MaybeContextChild<ReturnType<typeof context.useContext>>
@@ -12,13 +13,13 @@ export function Control(props: {
   let ref!: HTMLElement
 
   onMount(() => {
-    useEventListener(ref, 'click', (e) => {
+    makeEventListener(ref, 'click', (e) => {
       e.preventDefault()
       state.$nativeEl?.click()
       state.$nativeEl?.focus()
     })
 
-    useEventListener(ref, 'mousedown', (e) => {
+    makeEventListener(ref, 'mousedown', (e) => {
       e.preventDefault()
     })
   })

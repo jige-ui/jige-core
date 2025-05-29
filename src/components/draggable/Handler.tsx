@@ -1,8 +1,8 @@
 import { Ref } from '@solid-primitives/refs'
 import { onMount } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
-import { useEventListener } from 'solid-uses'
 import { context } from './context'
+import { makeEventListener } from '@solid-primitives/event-listener'
 
 function getElementRect(el: HTMLElement) {
   const rect = el.getBoundingClientRect()
@@ -27,7 +27,7 @@ export function Handler(props: {
   const [state, actions] = context.useContext()
 
   onMount(() => {
-    useEventListener(ref, ['mousedown'], (e) => {
+    makeEventListener(ref, 'mousedown', (e) => {
       e.preventDefault()
 
       const $tar = state.targetElement
@@ -44,7 +44,7 @@ export function Handler(props: {
       startRectPos = { x: rect.x, y: rect.y }
     })
 
-    useEventListener('mousemove', (e) => {
+    makeEventListener(document, 'mousemove', (e) => {
       if (!start) return
 
       if (state.disabled) {
@@ -68,7 +68,7 @@ export function Handler(props: {
       actions.setY(startRectPos.y + diffY)
     })
 
-    useEventListener('mouseup', () => {
+    makeEventListener(document, 'mouseup', () => {
       start = false
       actions.setStatus('stop')
     })

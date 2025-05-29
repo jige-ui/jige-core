@@ -7,6 +7,8 @@ import { Show, onMount, splitProps } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { onClickOutside, watch } from 'solid-uses'
 import { context } from './context'
+import { makeEventListener } from '@solid-primitives/event-listener'
+import { throttle } from '@solid-primitives/scheduled'
 
 function FloatingContentCore(
   props: {
@@ -28,12 +30,15 @@ function FloatingContentCore(
   const targetBounds = createElementBounds(() => state.refTrigger)
   const contentBounds = createElementBounds(() => state.refContent)
 
+  const throttleUpdate = throttle(actions.updatePos, 16)
+
   onMount(() => {
+    makeEventListener(window, 'resize', throttleUpdate)
+
     watch(
       () => [{ ...targetBounds }, { ...contentBounds }],
       () => {
-        actions.updatePos()
-        console.log('update by target or content state changed')
+        throttleUpdate()
       },
     )
 

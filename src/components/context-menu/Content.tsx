@@ -3,8 +3,9 @@ import { createElementBounds } from '@solid-primitives/bounds'
 import { Show, onMount } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { Portal } from 'solid-js/web'
-import { useEventListener, watch } from 'solid-uses'
+import { watch } from 'solid-uses'
 import context from './context'
+import { makeEventListener } from '@solid-primitives/event-listener'
 
 function ContentCore(
   props: { zindex?: number } & Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onAnimationEnd' | 'ref'>,
@@ -40,7 +41,7 @@ function ContentCore(
       },
     )
 
-    useEventListener('mouseup', (event) => {
+    makeEventListener(window, 'mouseup', (event) => {
       const el = state.triggerEl
       if (!el || el === event.target || event.composedPath().includes(el)) return
       const contentEl = state.contentEl

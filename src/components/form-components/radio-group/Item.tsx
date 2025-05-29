@@ -5,9 +5,9 @@ import { runSolidEventHandler } from '@/common/solidjs'
 import { Ref, mergeRefs } from '@solid-primitives/refs'
 import { createMemo, onMount, splitProps } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
-import { useEventListener } from 'solid-uses'
 import context from './context'
 import itemContext from './item-context'
+import { makeEventListener } from '@solid-primitives/event-listener'
 
 function Item<TValue = string | number>(props: {
   children: JSX.Element
@@ -65,13 +65,13 @@ function ItemControl(props: {
   let ref!: HTMLElement
 
   onMount(() => {
-    useEventListener(ref, 'click', (e) => {
+    makeEventListener(ref, 'click', (e) => {
       e.preventDefault()
       itemState.nativeEl?.click()
       itemState.nativeEl?.focus()
     })
 
-    useEventListener(ref, 'mousedown', (e) => {
+    makeEventListener(ref, 'mousedown', (e) => {
       e.preventDefault()
     })
   })

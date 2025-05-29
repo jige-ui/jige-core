@@ -66,7 +66,7 @@ export function Arrow(props: {
         return shift - finalProps.size
       }
       if (getPosCross() === 'end') {
-        return -shift + finalProps.size * 2
+        return shift + finalProps.size * 2
       }
       return shift
     }

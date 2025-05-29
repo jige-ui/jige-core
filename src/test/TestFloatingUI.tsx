@@ -24,7 +24,7 @@ export default function TestFloatingUI() {
   const [disabled, setDisabled] = createSignal(false)
   return (
     <div class='pt-10 ml-40 '>
-      <div class='overflow-auto h-250px w-full mt-100'>
+      <div class='overflow-auto h-250px w-full mt-100 ml-10vw'>
         <FloatingUiCore
           openDelay={3000}
           closeDelay={1500}

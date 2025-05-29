@@ -3,8 +3,9 @@ import type { CloseableStatus } from '@/common/types'
 import { mergeRefs } from '@solid-primitives/refs'
 import { Show, createSignal, onCleanup, onMount, splitProps } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
-import { useEventListener, watch } from 'solid-uses'
+import { watch } from 'solid-uses'
 import context from './context'
+import { makeEventListener } from '@solid-primitives/event-listener'
 
 type ContentProps = { key: string } & JSX.HTMLAttributes<HTMLDivElement>
 
@@ -15,7 +16,7 @@ function ContentCore(props: ContentProps) {
   let ref!: HTMLDivElement
 
   onMount(() => {
-    useEventListener(ref, 'animationend', () => {
+    makeEventListener(ref, 'animationend', () => {
       setStatus(status().replace('ing', 'ed') as CloseableStatus)
     })
 

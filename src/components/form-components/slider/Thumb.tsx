@@ -2,8 +2,8 @@ import { runSolidEventHandler } from '@/common/solidjs'
 import { mergeRefs } from '@solid-primitives/refs'
 import type { JSX } from 'solid-js'
 import { onMount, splitProps } from 'solid-js'
-import { useEventListener } from 'solid-uses'
 import context from './context'
+import { makeEventListener } from '@solid-primitives/event-listener'
 
 export default function Thumb(props: JSX.HTMLAttributes<HTMLDivElement>) {
   const [localProps, otherProps] = splitProps(props, ['ref', 'onMouseDown'])
@@ -15,7 +15,7 @@ export default function Thumb(props: JSX.HTMLAttributes<HTMLDivElement>) {
   let ref!: HTMLDivElement
 
   onMount(() => {
-    useEventListener('mousemove', (e) => {
+    makeEventListener(document, 'mousemove', (e) => {
       if (!isDragging) return
 
       let diff = 0
@@ -36,7 +36,7 @@ export default function Thumb(props: JSX.HTMLAttributes<HTMLDivElement>) {
       actions.setValue(startValue + (diff / parent) * (state.max - state.min))
     })
 
-    useEventListener('mouseup', () => {
+    makeEventListener(document, 'mouseup', () => {
       isDragging = false
       actions.setState('isDragging', false)
     })

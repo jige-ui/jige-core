@@ -1,7 +1,8 @@
 import { Ref, mergeRefs } from '@solid-primitives/refs'
 import type { JSX } from 'solid-js'
-import { useEventListener, watch } from 'solid-uses'
+import { watch } from 'solid-uses'
 import { context } from './context'
+import { makeEventListener } from '@solid-primitives/event-listener'
 
 // this is the trgger component
 export function Trigger(props: {
@@ -15,15 +16,15 @@ export function Trigger(props: {
     (refTrigger) => {
       if (!refTrigger) return
 
-      useEventListener(refTrigger, 'mouseenter', () => {
+      makeEventListener(refTrigger, 'mouseenter', () => {
         state.trigger === 'hover' && actions.setTimerOpen(true)
       })
 
-      useEventListener(refTrigger, 'mouseleave', () => {
+      makeEventListener(refTrigger, 'mouseleave', () => {
         state.trigger === 'hover' && actions.setTimerOpen(false)
       })
 
-      useEventListener(refTrigger, 'click', () => {
+      makeEventListener(refTrigger, 'click', () => {
         state.trigger === 'click' && actions.setOpen(state.status === 'closed')
       })
     },

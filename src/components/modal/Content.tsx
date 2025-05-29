@@ -5,8 +5,9 @@ import type { CloseableStatus } from '@/common/types'
 import { Ref } from '@solid-primitives/refs'
 import { createMemo, onCleanup, onMount, splitProps } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
-import { useEventListener, watch } from 'solid-uses'
+import { watch } from 'solid-uses'
 import { GlobalModalStore, context } from './context'
+import { makeEventListener } from '@solid-primitives/event-listener'
 
 export function Content(
   props: PropsWithContextChild<
@@ -34,11 +35,11 @@ export function Content(
     wrapperRef.focus()
     wrapperRef.tabIndex = -1
 
-    useEventListener(ref, 'animationend', () => {
+    makeEventListener(ref, 'animationend', () => {
       actions.setStatus(state.status.replace('ing', 'ed') as CloseableStatus)
     })
 
-    useEventListener('keydown', (e) => {
+    makeEventListener(document, 'keydown', (e) => {
       if (e.key === 'Escape' && isActive() && state.closeOnEsc) {
         actions.setOpen(false)
       }

@@ -1,6 +1,6 @@
 import { runSolidEventHandler } from '@/common/solidjs'
 import { mergeRefs } from '@solid-primitives/refs'
-import { throttle } from 'radash'
+import { throttle } from '@solid-primitives/scheduled'
 import { splitProps } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import context from './context'
@@ -9,7 +9,7 @@ export function ScrollArea(props: JSX.HTMLAttributes<HTMLDivElement>) {
   const [state, action] = context.useContext()
   const [local, others] = splitProps(props, ['children', 'onScroll', 'onScrollEnd', 'ref'])
 
-  const throttleSetValue = throttle({ interval: 15 }, action.setValue)
+  const throttleSetValue = throttle(action.setValue, 16)
 
   return (
     <div

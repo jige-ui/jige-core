@@ -1,4 +1,3 @@
-import { isArray } from 'radash'
 import type { JSX } from 'solid-js/jsx-runtime'
 
 export function runSolidEventHandler<
@@ -10,7 +9,7 @@ export function runSolidEventHandler<
     handler(event)
   }
 
-  if (isArray(handler)) {
+  if (Array.isArray(handler)) {
     handler[0](handler[1], event)
   }
 }
