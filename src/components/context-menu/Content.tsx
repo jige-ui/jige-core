@@ -1,11 +1,11 @@
 import { hasAnimation } from '@/common/dom'
 import { createElementBounds } from '@solid-primitives/bounds'
+import { makeEventListener } from '@solid-primitives/event-listener'
 import { Show, onMount } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { Portal } from 'solid-js/web'
 import { watch } from 'solid-uses'
 import context from './context'
-import { makeEventListener } from '@solid-primitives/event-listener'
 
 function ContentCore(
   props: { zindex?: number } & Omit<JSX.HTMLAttributes<HTMLDivElement>, 'onAnimationEnd' | 'ref'>,

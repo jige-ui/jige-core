@@ -1,10 +1,10 @@
 import type { MaybeContextChild } from '@/common/props'
 import { callMaybeContextChild } from '@/common/props'
+import { makeEventListener } from '@solid-primitives/event-listener'
 import { Ref } from '@solid-primitives/refs'
 import { createSignal } from 'solid-js'
 import { watch } from 'solid-uses'
 import context from './context'
-import { makeEventListener } from '@solid-primitives/event-listener'
 
 export function Trigger(props: {
   children: MaybeContextChild<ReturnType<typeof context.useContext>>

@@ -2,12 +2,12 @@ import { hiddenStyle } from '@/common/dom'
 import type { MaybeContextChild } from '@/common/props'
 import { callMaybeContextChild } from '@/common/props'
 import { runSolidEventHandler } from '@/common/solidjs'
+import { makeEventListener } from '@solid-primitives/event-listener'
 import { Ref, mergeRefs } from '@solid-primitives/refs'
 import { createMemo, onMount, splitProps } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import context from './context'
 import itemContext from './item-context'
-import { makeEventListener } from '@solid-primitives/event-listener'
 
 function Item<TValue = string | number>(props: {
   children: JSX.Element

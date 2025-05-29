@@ -1,8 +1,8 @@
+import { makeEventListener } from '@solid-primitives/event-listener'
 import { Ref, mergeRefs } from '@solid-primitives/refs'
 import type { JSX } from 'solid-js'
 import { watch } from 'solid-uses'
 import { context } from './context'
-import { makeEventListener } from '@solid-primitives/event-listener'
 
 // this is the trgger component
 export function Trigger(props: {

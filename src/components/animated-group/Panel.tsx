@@ -1,11 +1,11 @@
 import { getElementHeight, hasAnimation, uiRefreshDo } from '@/common/dom'
 import type { CloseableStatus } from '@/common/types'
+import { makeEventListener } from '@solid-primitives/event-listener'
 import { mergeRefs } from '@solid-primitives/refs'
 import { Show, createSignal, onCleanup, onMount, splitProps } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { watch } from 'solid-uses'
 import context from './context'
-import { makeEventListener } from '@solid-primitives/event-listener'
 
 type ContentProps = { key: string } & JSX.HTMLAttributes<HTMLDivElement>
 

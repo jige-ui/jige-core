@@ -1,7 +1,7 @@
+import { makeEventListener } from '@solid-primitives/event-listener'
 import type { JSX } from 'solid-js'
 import { createMemo, createSignal, onMount, splitProps } from 'solid-js'
 import context from './context'
-import { makeEventListener } from '@solid-primitives/event-listener'
 
 export default function Thumb(
   props: { class?: string; type: 'vertical' | 'horizontal' } & Omit<

@@ -1,8 +1,8 @@
+import { makeEventListener } from '@solid-primitives/event-listener'
 import { Ref } from '@solid-primitives/refs'
 import { onMount } from 'solid-js'
 import type { JSX } from 'solid-js/jsx-runtime'
 import { context } from './context'
-import { makeEventListener } from '@solid-primitives/event-listener'
 
 function getElementRect(el: HTMLElement) {
   const rect = el.getBoundingClientRect()

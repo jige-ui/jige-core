@@ -1,14 +1,14 @@
 import { hasAnimation } from '@/common/dom'
 import { runSolidEventHandler } from '@/common/solidjs'
 import { createElementBounds } from '@solid-primitives/bounds'
+import { makeEventListener } from '@solid-primitives/event-listener'
 import { mergeRefs } from '@solid-primitives/refs'
+import { throttle } from '@solid-primitives/scheduled'
 import type { JSX } from 'solid-js'
 import { Show, onMount, splitProps } from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { onClickOutside, watch } from 'solid-uses'
 import { context } from './context'
-import { makeEventListener } from '@solid-primitives/event-listener'
-import { throttle } from '@solid-primitives/scheduled'
 
 function FloatingContentCore(
   props: {

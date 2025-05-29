@@ -1,9 +1,9 @@
 import { runSolidEventHandler } from '@/common/solidjs'
+import { makeEventListener } from '@solid-primitives/event-listener'
 import { mergeRefs } from '@solid-primitives/refs'
 import type { JSX } from 'solid-js'
 import { onMount, splitProps } from 'solid-js'
 import context from './context'
-import { makeEventListener } from '@solid-primitives/event-listener'
 
 export default function Thumb(props: JSX.HTMLAttributes<HTMLDivElement>) {
   const [localProps, otherProps] = splitProps(props, ['ref', 'onMouseDown'])
