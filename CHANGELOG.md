@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.40.5](https://github.com/jige-ui/jige-core/compare/v0.40.4...v0.40.5) (2025-05-29)
+
+
+### Bug Fixes
+
+* lint ([b5a6820](https://github.com/jige-ui/jige-core/commit/b5a6820de8c89d00911fa584184aeb6cafe2f2ef))
+
 ## [0.40.4](https://github.com/jige-ui/jige-core/compare/v0.40.3...v0.40.4) (2025-05-12)
 
 
