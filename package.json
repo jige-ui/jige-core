@@ -2,7 +2,7 @@
   "name": "jige-core",
   "type": "module",
   "version": "0.40.5",
-  "packageManager": "pnpm@9.15.7",
+  "packageManager": "pnpm@10.13.1",
   "description": "jige-ui's core primitives",
   "license": "MIT",
   "sideEffects": false,
